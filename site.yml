@@ -4,6 +4,7 @@ runtime:
 site:
   title: OpenShift Admins DevOps
   url: http://redhat-scholars.github.io/openshift-admins-devops/
+  start_page: rhs-openshift-admins-devops::index.adoc
 
 content:
   sources:
@@ -14,6 +15,7 @@ content:
 
 asciidoc:
   attributes:
+    title: OpenShift Admins DevOps
     release-version: master
     page-pagination: true
   extensions:
