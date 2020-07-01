@@ -1,20 +1,12 @@
 = Welcome to OpenShift Admins Devops
-:page-layout: home
 :!sectids:
 
 [.text-center.strong]
-== Publish Services to Kubernetes
+== OpenShift Admins for DevOps Master Course
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+Operators making your clusters ready for your Developer-users.  To make your Dev-users Awesome (positively impact their https://www.thoughtworks.com/radar/techniques/four-key-metrics[4 metrics]).  Leveraging the current https://docs.google.com/document/d/1tgBX3jIDvp02qQIdH792qXEkyuevWNFa3ufcM1kKiTo/edit#heading=h.64o33z94fpto[Operators & Admins Master Course].
 
 [.tiles.browse]
 == Browse modules
 
-[.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
-
-[.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+IMPORTANT: MODULE UNDER DEVELOPMENT

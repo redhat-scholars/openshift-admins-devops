@@ -2,12 +2,14 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Template Tutorial
-  url: https://redhat-developer-demos.github.io/template-tutorial
+  title: OpenShift Admins DevOps
+  url: http://redhat-scholars.github.io/openshift-admins-devops/
 
 content:
   sources:
-    - url: ./
+    - url: git@github.com:redhat-scholars/openshift-admins-devops.git
+      tags: []
+      branches: master
       start_path: documentation
 
 asciidoc:
