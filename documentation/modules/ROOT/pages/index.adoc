@@ -1,4 +1,4 @@
-= Welcome to Template Tutorial
+= Welcome to OpenShift Admins Devops
 :page-layout: home
 :!sectids:
 
