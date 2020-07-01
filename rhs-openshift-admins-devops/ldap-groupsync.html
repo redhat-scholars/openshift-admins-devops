@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/ldap-groupsync.html">
+    <link rel="prev" href="#auth-and-authnz.adoc">
+    <link rel="next" href="logging.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="ldap-groupsync.html">LDAP Group Sync</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/ldap-groupsync.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_configuring_external_authentication_providers"><a class="anchor" href="#_configuring_external_authentication_providers"></a>Configuring External Authentication Providers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift supports a number of different authentication providers, and you can
+find the complete list in the
+<a href="https://docs.openshift.com/container-platform/4.0/authentication/understanding-identity-provider.html">understanding
+identity provider configuration</a>. One of the most commonly used authentication
+providers is LDAP, whether provided by Microsoft Active Directory or by other
+sources.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift can perform user authentication against an LDAP server, and can also
+configure group membership and certain RBAC attributes based on LDAP group
+membership.</p>
+</div>
+<div class="sect2">
+<h3 id="_background_ldap_structure"><a class="anchor" href="#_background_ldap_structure"></a>Background: LDAP Structure</h3>
+<div class="paragraph">
+<p>In this environment we are providing LDAP with the following user groups:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ose-user</code>: Users with OpenShift access</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Any users who should be able to log-in to OpenShift must be members of this
+group</p>
+</li>
+<li>
+<p>All of the below mentioned users are in this group</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ose-normal-dev</code>: Normal OpenShift users</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Regular users of OpenShift without special permissions</p>
+</li>
+<li>
+<p>Contains: <code>normaluser1</code>, <code>teamuser1</code>, <code>teamuser2</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ose-fancy-dev</code>: Fancy OpenShift users</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Users of OpenShift that are granted some special privileges</p>
+</li>
+<li>
+<p>Contains: <code>fancyuser1</code>, <code>fancyuser2</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ose-teamed-app</code>: Teamed app users</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A group of users that will have access to the same OpenShift <strong>Project</strong></p>
+</li>
+<li>
+<p>Contains: <code>teamuser1</code>, <code>teamuser2</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_examine_the_oauth_configuration"><a class="anchor" href="#_examine_the_oauth_configuration"></a>Examine the OAuth configuration</h4>
+<div class="paragraph">
+<p>Since this is a pure, vanilla OpenShift 4 installation, it has the default OAuth resource. You can examine that OAuth configuration with the following:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get oauth cluster -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  annotations:
+    release.openshift.io/create-only: "true"
+  creationTimestamp: "2020-03-17T18:12:52Z"
+  generation: 1
+  name: cluster
+  resourceVersion: "1563"
+  selfLink: /apis/config.openshift.io/v1/oauths/cluster
+  uid: ebb0582d-b0e4-4c40-a33f-12459593f8e2
+spec: {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are a few things to note here. Firstly, there&#8217;s basically nothing here!
+How does the <code>kubeadmin</code> user work, then? The OpenShift OAuth system knows to
+look for a <code>kubeadmin</code> <strong>Secret</strong> in the <code>kube-system</code> <strong>Namespace</strong>. You can
+examine it with the following:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get secret -n kube-system kubeadmin -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: v1
+data:
+  kubeadmin: JDJhJDEwJDdQNHZtbXMxdmpDa3FsNlJMLjJBcC5BSWdBazB6d09IWUdXZEdrRXBERGRwWXNmVVcxanpX
+kind: Secret
+metadata:
+  creationTimestamp: "2019-04-29T17:30:51Z"
+  name: kubeadmin
+  namespace: kube-system
+  resourceVersion: "2065"
+  selfLink: /api/v1/namespaces/kube-system/secrets/kubeadmin
+  uid: 892945dc-6aa4-11e9-9959-02774c6d6b2e
+type: Opaque</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That <strong>Secret</strong> contains the encoded hash of the <code>kubeadmin</code> password. This
+account will continue to work even after we configure a new <code>OAuth</code>. If you
+want to disable it, you would need to delete the secret.</p>
+</div>
+<div class="paragraph">
+<p>In a real-world environment, you will likely want to integrate with your
+existing identity management solution. For this lab we are configuring LDAP
+as our <code>identityProvider</code>. Here&#8217;s an example of the OAuth configuration. Look
+for the element in <code>identityProviders</code> with <code>type: LDAP</code> like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: ldap <i class="conum" data-value="1"></i><b>(1)</b>
+    challenge: false
+    login: true
+    mappingMethod: claim <i class="conum" data-value="2"></i><b>(2)</b>
+    type: LDAP
+    ldap:
+      attributes: <i class="conum" data-value="3"></i><b>(3)</b>
+        id:
+        - dn
+        email:
+        - mail
+        name:
+        - cn
+        preferredUsername:
+        - uid
+      bindDN: "uid=openshiftworkshop,ou=Users,o=5e615ba46b812e7da02e93b5,dc=jumpcloud,dc=com" <i class="conum" data-value="4"></i><b>(4)</b>
+      bindPassword: <i class="conum" data-value="5"></i><b>(5)</b>
+        name: ldap-secret
+      ca: <i class="conum" data-value="6"></i><b>(6)</b>
+        name: ca-config-map
+      insecure: false
+      url: "ldaps://ldap.jumpcloud.com/ou=Users,o=5e615ba46b812e7da02e93b5,dc=jumpcloud,dc=com?uid?sub?(memberOf=cn=ose-user,ou=Users,o=5e615ba46b812e7da02e93b5,dc=jumpcloud,dc=com)" <i class="conum" data-value="7"></i><b>(7)</b>
+  tokenConfig:
+    accessTokenMaxAgeSeconds: 86400</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Some notable fields under <code>identityProviders:</code>:</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>name</code>: The unique ID of the identity provider. It is possible to have
+multiple authentication providers in an OpenShift environment, and OpenShift is
+able to distinguish between them.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>mappingMethod: claim</code>: This section has to do with how usernames are
+assigned within an OpenShift cluster when multiple providers are configured. See
+the
+<a href="https://docs.openshift.com/container-platform/4.0/authentication/understanding-identity-provider.html#identity-provider-parameters-understanding-identity-provider">Identity provider parameters</a> section for more information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>attributes</code>: This section defines the LDAP fields to iterate over and
+assign to the fields in the OpenShift user&#8217;s "account". If any attributes are
+not found / not populated when searching through the list, the entire
+authentication fails. In this case we are creating an identity that is
+associated with the LDAP <code>dn</code>, an email address from the LDAP <code>mail</code>, a name from
+the LDAP <code>cn</code>, and a username from the LDAP <code>uid</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>bindDN</code>: When searching LDAP, bind to the server as this user.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>bindPassword</code>: Reference to the Secret that has the password to use when binding for searching.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><code>ca</code>: Reference to the ConfigMap that contains the CA certificate to use for
+validating the SSL certificate of the LDAP server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>url</code>: Identifies the LDAP server and the search to perform.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For more information on the specific details of LDAP authentication in
+OpenShift you can refer to the
+<a href="https://docs.openshift.com/container-platform/4.1/authentication/identity_providers/configuring-ldap-identity-provider.html" target="_blank" rel="noopener">Configuring
+an LDAP identity provider</a> documentation.</p>
+</div>
+<div class="paragraph">
+<p>To setup the LDAP identity provider we must:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a <code>Secret</code> with the bind password.</p>
+</li>
+<li>
+<p>Create a <code>ConfigMap</code> with the CA certificate.</p>
+</li>
+<li>
+<p>Update the <code>cluster</code> <code>OAuth</code> object with the LDAP identity provider.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As the <code>kubeadmin</code> user apply the OAuth configuration with <code>oc</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create secret generic ldap-secret --from-literal=bindPassword=b1ndP^ssword -n openshift-config
+wget https://ssl-ccp.godaddy.com/repository/gd-class2-root.crt -O {{ HOME_PATH }}/support/ca.crt
+oc create configmap ca-config-map --from-file={{ HOME_PATH }}/support/ca.crt -n openshift-config
+oc apply -f {{ HOME_PATH }}/support/oauth-cluster.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>We use <code>apply</code> because there is an existing <code>OAuth</code> object. If you used
+<code>create</code> you would get an outright error that the object already exists. You
+still get a warning, but that&#8217;s OK.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_syncing_ldap_groups_to_openshift_groups"><a class="anchor" href="#_syncing_ldap_groups_to_openshift_groups"></a>Syncing LDAP Groups to OpenShift Groups</h4>
+<div class="paragraph">
+<p>In OpenShift, groups can be used to manage users and control permissions for
+multiple users at once. There is a section in the documentation on how to
+<a href="https://docs.openshift.com/container-platform/3.11/install_config/syncing_groups_with_ldap.html" target="_blank" rel="noopener">sync
+groups with LDAP</a>. Syncing groups involves running a program called <code>groupsync</code>
+when logged into OpenShift as a user with <code>cluster-admin</code> privileges, and using
+a configuration file that tells OpenShift what to do with the users it finds in
+the various groups.</p>
+</div>
+<div class="paragraph">
+<p>We have provided a <code>groupsync</code> configuration file for you:</p>
+</div>
+<div class="paragraph">
+<p>View configuration file</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat {{ HOME_PATH }}/support/groupsync.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Without going into too much detail (you can look at the documentation), the
+<code>groupsync</code> config file does the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>searches LDAP using the specified bind user and password</p>
+</li>
+<li>
+<p>queries for any LDAP groups whose name begins with <code>ose-</code></p>
+</li>
+<li>
+<p>creates OpenShift groups with a name from the <code>cn</code> of the LDAP group</p>
+</li>
+<li>
+<p>finds the members of the LDAP group and then puts them into the created
+OpenShift group</p>
+</li>
+<li>
+<p>uses the <code>dn</code> and <code>uid</code> as the UID and name attributes, respectively, in
+OpenShift</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Execute the <code>groupsync</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm groups sync --sync-config={{ HOME_PATH }}/support/groupsync.yaml --confirm</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see output like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>group/ose-fancy-dev
+group/ose-user
+group/ose-normal-dev
+group/ose-teamed-app</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What you are seeing is the <strong>Group</strong> objects that have been created by the
+<code>groupsync</code> command. If you are curious about the <code>--confirm</code> flag, check the
+output of the help with <code>oc adm groups sync -h</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you want to see the <strong>Groups</strong> that were created, execute the following:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get groups</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see output like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME             USERS
+ose-fancy-dev    fancyuser1, fancyuser2
+ose-normal-dev   normaluser1, teamuser1, teamuser2
+ose-teamed-app   teamuser1, teamuser2
+ose-user         fancyuser1, fancyuser2, normaluser1, teamuser1, teamuser2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take a look at a specific group in YAML:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get group ose-fancy-dev -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The YAML looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  annotations:
+    openshift.io/ldap.sync-time: 2020-03-11T10:57:03-0400
+    openshift.io/ldap.uid: cn=ose-fancy-dev,ou=Users,o=5e615ba46b812e7da02e93b5,dc=jumpcloud,dc=com
+    openshift.io/ldap.url: ldap.jumpcloud.com:636
+  creationTimestamp: "2020-03-11T14:57:03Z"
+  labels:
+    openshift.io/ldap.host: ldap.jumpcloud.com
+  name: ose-fancy-dev
+  resourceVersion: "48481"
+  selfLink: /apis/user.openshift.io/v1/groups/ose-fancy-dev
+  uid: 630a9d2b-b577-46bd-8294-6b26e7f9a6e1
+users:
+- fancyuser1
+- fancyuser2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift has automatically associated some LDAP metadata with the <strong>Group</strong>, and
+has listed the users who are in the group.</p>
+</div>
+<div class="paragraph">
+<p>What happens if you list the <strong>Users</strong>?</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get user</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>No resources found.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Why would there be no <strong>Users</strong> found? They are clearly listed in the <strong>Group</strong>
+definition.</p>
+</div>
+<div class="paragraph">
+<p><strong>Users</strong> are not actually created until the first time they try to log in. What
+you are seeing in the <strong>Group</strong> definition is simply a placeholder telling
+OpenShift that, if it encounters a <strong>User</strong> with that specific ID, that it should
+be associated with the <strong>Group</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_change_group_policy"><a class="anchor" href="#_change_group_policy"></a>Change Group Policy</h4>
+<div class="paragraph">
+<p>In your environment, there is a special group of super developers called
+<em>ose-fancy-dev</em> who should have special <code>cluster-reader</code> privileges. This is a role
+that allows a user to view administrative-level information about the cluster.
+For example, they can see the list of all <strong>Projects</strong> in the cluster.</p>
+</div>
+<div class="paragraph">
+<p>Change the policy for the <code>ose-fancy-dev</code> <strong>Group</strong>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-cluster-role-to-group cluster-reader ose-fancy-dev</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you are interested in the different roles that come with OpenShift, you can
+learn more about them in the
+<a href="https://docs.openshift.com/container-platform/4.1/authentication/using-rbac.html" target="_blank" rel="noopener">role-based access control (RBAC)</a> documentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_examine_cluster_reader_policy"><a class="anchor" href="#_examine_cluster_reader_policy"></a>Examine <code>cluster-reader</code> policy</h4>
+<div class="paragraph">
+<p>Go ahead and login as a regular user:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, try to list <strong>Projects</strong>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get projects</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>No resources found.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, login as a member of <code>ose-fancy-dev</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u fancyuser1 -p Op#nSh1ft</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then perform the same <code>oc get projects</code> and you will now see the list of all
+of the projects in the cluster:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                                    DISPLAY NAME                        STATUS
+    app-management
+  * default
+    kube-public
+    kube-system
+    labguide
+    openshift
+    openshift-apiserver
+...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should now be starting to understand how RBAC in OpenShift Container
+Platform can work.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_projects_for_collaboration"><a class="anchor" href="#_create_projects_for_collaboration"></a>Create Projects for Collaboration</h4>
+<div class="paragraph">
+<p>Make sure you login as the cluster administrator:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:serviceaccount:lab-ocp-cns:dashboard-user</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, create several <strong>Projects</strong> for people to collaborate:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm new-project app-dev --display-name="Application Development"
+oc adm new-project app-test --display-name="Application Testing"
+oc adm new-project app-prod --display-name="Application Production"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You have now created several <strong>Projects</strong> that represent a typical Software
+Development Lifecycle setup. Next, you will configure <strong>Groups</strong> to grant
+collaborative access to these projects.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Creating projects with <code>oc adm new-project</code> does <strong>not</strong> use the project request
+process or the project request template. These projects will not have quotas or
+limitranges applied by default. A cluster administrator can "impersonate" other
+users, so there are several options if you wanted these projects to get
+quotas/limit ranges:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>use <code>--as</code> to specify impersonating a regular user with <code>oc new-project</code></p>
+</li>
+<li>
+<p>use <code>oc process</code> and provide values for the project request template, piping
+into create (eg: <code>oc process &#8230;&#8203; | oc create -f -</code>). This will create all of
+the objects in the project request template, which would include the quota and
+limit range.</p>
+</li>
+<li>
+<p>manually create/define the quota and limit ranges after creating the projects.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>For these exercises it is not important to have quotas or limit ranges on these
+projects.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_map_groups_to_projects"><a class="anchor" href="#_map_groups_to_projects"></a>Map Groups to Projects</h4>
+<div class="paragraph">
+<p>As you saw earlier, there are several roles within OpenShift that are
+preconfigured. When it comes to <strong>Projects</strong>, you similarly can grant view, edit,
+or administrative access. Let&#8217;s give our <code>ose-teamed-app</code> users access to edit the
+development and testing projects:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-role-to-group edit ose-teamed-app -n app-dev
+oc adm policy add-role-to-group edit ose-teamed-app -n app-test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then give them access to view production:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-role-to-group view ose-teamed-app -n app-prod</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, give the <code>ose-fancy-dev</code> group edit access to the production project:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-role-to-group edit ose-fancy-dev -n app-prod</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_examine_group_access"><a class="anchor" href="#_examine_group_access"></a>Examine Group Access</h4>
+<div class="paragraph">
+<p>Log in as <code>normaluser1</code> and see what <strong>Projects</strong> you can see:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft
+oc get projects</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>No resources found.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, try <code>teamuser1</code> from the <code>ose-teamed-app</code> group:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u teamuser1 -p Op#nSh1ft
+oc get projects</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME       DISPLAY NAME              STATUS
+app-dev    Application Development   Active
+app-prod   Application Production    Active
+app-test   Application Testing       Active</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You did not grant the team users edit access to the production project. Go ahead
+and try to create something in the production project as <code>teamuser1</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project app-prod
+oc new-app docker.io/siamaksade/mapit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see that it will not work:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>error: can't lookup images: imagestreamimports.image.openshift.io is forbidden: User "teamuser1" cannot create resource "imagestreamimports" in API group "image.openshift.io" in the namespace "app-prod"
+error:  local file access failed with: stat docker.io/siamaksade/mapit: no such file or directory
+error: unable to locate any images in image streams, templates loaded in accessible projects, template files, local docker images with name "docker.io/siamaksade/mapit"
+
+Argument 'docker.io/siamaksade/mapit' was classified as an image, image~source, or loaded template reference.
+
+The 'oc new-app' command will match arguments to the following types:
+
+  1. Images tagged into image streams in the current project or the 'openshift' project
+     - if you don't specify a tag, we'll add ':latest'
+  2. Images in the Docker Hub, on remote registries, or on the local Docker engine
+  3. Templates in the current project or the 'openshift' project
+  4. Git repository URLs or local paths that point to Git repositories
+
+--allow-missing-images can be used to point to an image that does not exist yet.
+
+See 'oc new-app -h' for examples.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This failure is exactly what we wanted to see.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_prometheus"><a class="anchor" href="#_prometheus"></a>Prometheus</h4>
+<div class="paragraph">
+<p>Now that you have a user with <code>cluster-reader</code> privileges (one that can see
+many administrative aspects of the cluster), we can revisit Prometheus and
+attempt to log-in to it.</p>
+</div>
+<div class="paragraph">
+<p>Login as a the user with <code>cluster-reader</code> privileges:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u fancyuser1 -p Op#nSh1ft</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Find the <code>prometheus</code> <code>Route</code> with the following command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route prometheus-k8s -n openshift-monitoring</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME             HOST/PORT                                                                      PATH   SERVICES         PORT   TERMINATION          WILDCARD
+prometheus-k8s   prometheus-k8s-openshift-monitoring.{{ ROUTE_SUBDOMAIN }}          prometheus-k8s   web    reencrypt/Redirect   None</pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before continuing, make sure to go to the OpenShift web console and log out
+by using the dropdown menu at the upper right where it says <code>kube:admin</code>.
+Otherwise Prometheus will try to use your <code>kubeadmin</code> user to pass through
+authentication. While it will work, it doesn&#8217;t demonstrate the
+<code>cluster-reader</code> role.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The installer configured a <code>Route</code> for Prometheus by default. Go ahead and
+control+click the link:https://prometheus-k8s-openshift-monitoring.{{
+ROUTE_SUBDOMAIN }}[Prometheus link] to open it in your browser. You&#8217;ll be
+greeted with a login screen. Click the <strong>Log in with OpenShift</strong> button, then
+select the <code>ldap</code> auth mechanism, and use the <code>fancyuser1</code> user that you gave
+<code>cluster-reader</code> privileges to earlier. More specifically, the
+<code>ose-fancy-dev</code> group has <code>cluster-reader</code> permissions, and <code>fancyuser1</code> is a
+member. Remember that the password for all of these users is <code>openshift</code>. You
+will probably get a certificate error because of the self-signed certificate.
+Make sure to accept it.</p>
+</div>
+<div class="paragraph">
+<p>After logging in, the first time you will be presented with an auth proxy
+permissions acknowledgement:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/images/prometheus-auth-proxy.png" alt="prometheus auth proxy">
+</div>
+<div class="title">Figure 1. Auth Proxy Acceptance.</div>
+</div>
+<div class="paragraph">
+<p>There is actually an OAuth proxy that sits in the flow between you and the
+Prometheus container. This proxy is used to validate your AuthenticatioN
+(AuthN) as well as authorize (AuthZ) what is allowed to happen. Here you are
+explicitly authorizing the permissions from your <code>fancyuser1</code> account to be
+used as part of accessing Prometheus. Hit <em>Allow selected permissions</em>.</p>
+</div>
+<div class="paragraph">
+<p>At this point you are viewing Prometheus. There are no alerts configured. If
+you look at <code>Status</code> and then <code>Targets</code> you can see some interesting
+information about the current state of the cluster.</p>
+</div>
+<div class="paragraph">
+<p>After you are done, make sure to login again as the admin user:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u system:serviceaccount:lab-ocp-cns:dashboard-user</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="#auth-and-authnz.adoc">Authentication and Authorization</a></span>
+  <span class="next"><a href="logging.html">Logging</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

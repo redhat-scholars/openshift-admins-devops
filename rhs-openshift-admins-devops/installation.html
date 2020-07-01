@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{title} :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/installation.html">
+    <link rel="next" href="#rhs-oad-install-verify-login">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#rhs-oad-install-verify">Installation and Setup</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/installation.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">{title}</h1>
+<div class="sect1">
+<h2 id="rhs-oad-install-verify"><a class="anchor" href="#rhs-oad-install-verify"></a>Installation and Verification</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The scope of the new installer-provisioned infrastructure (IPI) OpenShift 4
+installation is purposefully narrow. It is designed for simplicity and
+ensured success. Many of the items and configurations that were previously
+handled by the installer are now expected to be "Day 2" operations, performed
+just after the installation of the control plane and basic workers completes.
+The installer provides a guided experience for provisioning the cluster on a
+particular platform.</p>
+</div>
+<div class="paragraph">
+<p>This IPI installation has already been performed for you, and the cluster is
+in its basic, default state.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rhs-oad-install-verify-login"><a class="anchor" href="#rhs-oad-install-verify-login"></a>Logging in</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To inspect the cluster installation, you can simply SSH to the bastion host where it was installed on like so:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -l {{ SSH_USERNAME }} {{ BASTION_FQDN }} -o ServerAliveInterval=120</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is your ssh password:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{{ SSH_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll notice that there is a 4-digit alphanumeric string (eg: f4a3) in the hostname. This
+string is your <code>GUID</code>. Since you will often use <code>GUID</code>, it makes sense to
+export it as an environment variable:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export GUID=`hostname | cut -d. -f2`</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rhs-oad-install-verify-master"><a class="anchor" href="#rhs-oad-install-verify-master"></a>Master Components</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/openshift_master_4_responsibilities.png" alt="openshift master 4 responsibilities">
+</div>
+<div class="title">Figure 1. OpenShift Master&#8217;s 4 main responsibilities.</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-api"><a class="anchor" href="#rhs-oad-install-verify-api"></a>API/Authentication</h3>
+<div class="paragraph">
+<p>The Kubernetes API server validates and configures the resources that make up a Kubernetes cluster.</p>
+</div>
+<div class="paragraph">
+<p>Common things that interact with the Kubernetes API server are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OpenShift Web Console</p>
+</li>
+<li>
+<p>OpenShift <code>oc</code> command line tool</p>
+</li>
+<li>
+<p>OpenShift Node</p>
+</li>
+<li>
+<p>Kubernetes Controllers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>All interactions with the API server are secured using TLS. In addition, all
+API calls must be authenticated (the user is who they say they are) and
+authorized (the user has rights to make the requested API calls).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-ds"><a class="anchor" href="#rhs-oad-install-verify-ds"></a>Data Store</h3>
+<div class="paragraph">
+<p>The OpenShift Data Store (etcd) stores the persistent master state while
+other components watch etcd for changes to bring themselves into the desired
+state. etcd can be optionally configured for high availability, typically
+deployed with 2n+1 peer services.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>etcd stores the cluster&#8217;s state. It is not used to store user application data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-scheduler"><a class="anchor" href="#rhs-oad-install-verify-scheduler"></a>Scheduler</h3>
+<div class="paragraph">
+<p>The pod scheduler is responsible for determining placement of new pods onto
+nodes within the cluster.</p>
+</div>
+<div class="paragraph">
+<p>The scheduler is very flexible and can take the physical topology of the
+cluster into account (racks, datacenters, etc).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-health-scaling"><a class="anchor" href="#rhs-oad-install-verify-health-scaling"></a>Health / Scaling</h3>
+<div class="paragraph">
+<p>Each pod can register both liveness and readiness probes.</p>
+</div>
+<div class="paragraph">
+<p>Liveness probes tell the system if the pod is healthy or not. If the pod is
+not healthy, it can be restarted automatically.</p>
+</div>
+<div class="paragraph">
+<p>Readiness probes tell the system when the pod is ready to take traffic. This,
+for example, can be used by the cluster to know when to put a pod into the
+load balancer.</p>
+</div>
+<div class="paragraph">
+<p>For more information on the OpenShift Master&#8217;s areas of responsibility, please refer to
+the
+<a href="https://docs.openshift.com/container-platform/3.11/architecture/infrastructure_components/kubernetes_infrastructure.html">infrastructure components section</a> of the product documentation.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rhs-oad-install-verify-examine"><a class="anchor" href="#rhs-oad-install-verify-examine"></a>Examining the installation artifacts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift 4 installs with two effective superusers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>kubeadmin</code> (technically an alias for <code>kube:admin</code>)</p>
+</li>
+<li>
+<p><code>system:admin</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Why two? Because <code>system:admin</code> is a user that uses a certificate to login
+and has no password. Therefore this superuser cannot log-in to the web
+console (which requires a password).</p>
+</div>
+<div class="paragraph">
+<p>If you want additional users to be able to authenticate to and use the
+cluster, you need to configure your desired authentication mechanisms using
+CustomResources and Operators as previously discussed. LDAP-based
+authentication will be configured as one of the lab exercises.</p>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-install"><a class="anchor" href="#rhs-oad-install-verify-install"></a>Verifying the Installation</h3>
+<div class="paragraph">
+<p>Let&#8217;s do some basic tests with your installation. As an administrator, most
+of your interaction with OpenShift will be from the command line. The <code>oc</code>
+program is a command line interface that talks to the OpenShift API.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-oc-login"><a class="anchor" href="#rhs-oad-install-verify-oc-login"></a>Login to OpenShift</h3>
+<div class="paragraph">
+<p>When the installation completed, the installer left some artifacts that
+contain the various URLs and passwords required to access the environment.
+The installation program was run under the <code>ec2-user</code> account.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls -al ~/cluster-$GUID</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see something like the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">total 3348
+drwxrwxr-x. 4 ec2-user ec2-user     199 May  3 08:13 .
+drwx------. 7 lab-user users        134 May  3 13:46 ..
+drwxr-xr-x. 2 ec2-user ec2-user      50 May  3 08:00 auth
+-rw-r--r--. 1 ec2-user ec2-user     271 May  3 07:54 metadata.json
+-rw-rw-r--. 1 ec2-user ec2-user  576663 May  3 08:18 .openshift_install.log
+-rw-r--r--. 1 ec2-user ec2-user 2351869 May  3 08:00 .openshift_install_state.json
+-rw-r--r--. 1 ec2-user ec2-user     623 May  3 07:54 terraform.aws.auto.tfvars
+-rw-rw-r--. 1 ec2-user ec2-user  170852 May  3 08:13 terraform.tfstate
+-rw-r--r--. 1 ec2-user ec2-user  312196 May  3 07:54 terraform.tfvars
+drwxr-xr-x. 2 ec2-user ec2-user      62 May  3 07:54 tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The OpenShift 4 IPI installation embeds Terraform in order to create some of
+the cloud provider resources. You can see some of its outputs here. The
+important file right now is the <code>.openshift_install.log</code>. Its last few lines
+contain the relevant output to figure out how to access your environment:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tail -n5 ~/cluster-$GUID/.openshift_install.log</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">You will see something like the following</dt>
+</dl>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">time="2019-04-08T14:49:34Z" level=info msg="Install complete!"
+time="2019-04-08T14:49:34Z" level=info msg="Run 'export KUBECONFIG=/home/ec2-user/cluster-f4a3/auth/kubeconfig' to manage the cluster with 'oc', the OpenShift CLI."
+time="2019-04-08T14:49:34Z" level=info msg="The cluster is ready when 'oc login -u kubeadmin -p SxUr2-tQ2py-c6jq2-YtjW3' succeeds (wait a few minutes)."
+time="2019-04-08T14:49:34Z" level=info msg="Access the OpenShift web-console here: &lt;a href="https://console-openshift-console.apps.cluster-f4a3.f4a3.openshiftworkshop.com"" class="bare"&gt;https://console-openshift-console.apps.cluster-f4a3.f4a3.openshiftworkshop.com"&lt;/a&gt;
+time="2019-04-08T14:49:34Z" level=info msg="Login to the console with user: kubeadmin, password: SxUr2-tQ2py-c6jq2-YtjW3"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The installation was run as a different system user, and the artifacts folder
+is read-only mounted into your <code>lab-user</code> folder. While the installer has
+fortunately given you a convenient <code>export</code> command to run, you don&#8217;t have
+write permissions to the path that it shows. The <code>oc</code> command will try to
+write to the <code>KUBECONFIG</code> file, which it can&#8217;t, so you&#8217;ll get errors later if you try it.</p>
+</div>
+<div class="paragraph">
+<p>Our installation process has actually already copied the config you need to
+<code>~/.kube/config</code>, so you are already logged in. Try the following:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>oc</code> tool should already be in your path and be executable.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-cluster-version"><a class="anchor" href="#rhs-oad-install-verify-cluster-version"></a>Examine the Cluster Version</h3>
+<div class="paragraph">
+<p>First, you can check the current version of your OpenShift cluster by
+executing the following:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterversion</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you will see some output like:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version   4.3.1     True        False         15m     Cluster version is 4.3.1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more details, you can execute the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe clusterversion</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which will give you additional details, such as available updates:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:         version
+Namespace:
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+API Version:  config.openshift.io/v1
+Kind:         ClusterVersion
+Metadata:
+  Creation Timestamp:  2020-03-03T13:46:19Z
+  Generation:          1
+  Resource Version:    17564
+  Self Link:           /apis/config.openshift.io/v1/clusterversions/version
+  UID:                 0cf1369c-0cdf-4be8-85a1-86e4f5611746
+Spec:
+  Channel:     stable-4.3
+  Cluster ID:  b10d095f-03fe-41c8-985e-75d4d82bfc5e
+  Upstream:    https://api.openshift.com/api/upgrades_info/v1/graph
+Status:
+  Available Updates:  &lt;nil&gt;
+  Conditions:
+    Last Transition Time:  2020-03-03T14:06:32Z
+    Message:               Done applying 4.3.1
+    Status:                True
+    Type:                  Available
+    Last Transition Time:  2020-03-03T14:02:02Z
+    Status:                False
+    Type:                  Failing
+    Last Transition Time:  2020-03-03T14:06:32Z
+    Message:               Cluster version is 4.3.1
+    Status:                False
+    Type:                  Progressing
+    Last Transition Time:  2020-03-03T13:46:28Z
+    Status:                True
+    Type:                  RetrievedUpdates
+  Desired:
+    Force:    false
+    Image:    quay.io/openshift-release-dev/ocp-release@sha256:ea7ac3ad42169b39fce07e5e53403a028644810bee9a212e7456074894df40f3
+    Version:  4.3.1
+  History:
+    Completion Time:    2020-03-03T14:06:32Z
+    Image:              quay.io/openshift-release-dev/ocp-release@sha256:ea7ac3ad42169b39fce07e5e53403a028644810bee9a212e745607
+4894df40f3
+    Started Time:       2020-03-03T13:46:28Z
+    State:              Completed
+    Verified:           false
+    Version:            4.3.1
+  Observed Generation:  1
+  Version Hash:         7VzR42wcDZ4=
+Events:                 &lt;none&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-cluster-nodes"><a class="anchor" href="#rhs-oad-install-verify-cluster-nodes"></a>Look at the Nodes</h3>
+<div class="paragraph">
+<p>Execute the following command to see a list of the <strong>Nodes</strong> that OpenShift knows
+about:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look something like the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                                         STATUS   ROLES    AGE    VERSION
+ip-10-0-133-191.us-east-2.compute.internal   Ready    worker   44m   v1.16.2
+ip-10-0-129-109.us-east-2.compute.internal   Ready    master   59m   v1.16.2
+ip-10-0-133-205.us-east-2.compute.internal   Ready    worker   49m   v1.16.2
+ip-10-0-146-235.us-east-2.compute.internal   Ready    worker   49m   v1.16.2
+ip-10-0-153-202.us-east-2.compute.internal   Ready    master   58m   v1.16.2
+ip-10-0-165-150.us-east-2.compute.internal   Ready    master   59m   v1.16.2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You have 3 masters and 3 workers. The OpenShift <strong>Master</strong> is also a <strong>Node</strong>
+because it needs to participate in the software defined network (SDN). If you
+need additional nodes for additional purposes, you can create them very
+easily when using IPI and leveraging the cloud provider operators. You will
+create nodes to run OpenShift infrastructure components (registry, router,
+etc.) in a subsequent exercise.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rhs-oad-install-verify-check-web-console"><a class="anchor" href="#rhs-oad-install-verify-check-web-console"></a>Check the Web Console</h3>
+<div class="paragraph">
+<p>OpenShift provides a web console for users, developers, application
+operators, and administrators to interact with the environment. Many of the
+cluster administration functions, including upgrading the cluster itself, can
+be performed simply by using the web console.</p>
+</div>
+<div class="paragraph">
+<p>The web console actually runs as an application inside the OpenShift
+environment and is exposed via the OpenShift Router. You will learn more
+about the router in a subsequent exercise. For now, you can simply
+control+click the link:</p>
+</div>
+<div class="paragraph">
+<p>{{ MASTER_URL }}</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_you_will_now_exit_the_ssh_session"><a class="anchor" href="#_you_will_now_exit_the_ssh_session"></a>You will now exit the ssh session</h3>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code>exit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you accidentally hit exit more than once and connection to the console closed, refresh the webpage to reconnect.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will receive a self-signed certificate error in your browser when you
+first visit the web console. When OpenShift is installed, by default, a CA
+and SSL certificates are generated for all inter-component communication
+within OpenShift, including the web console.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="#rhs-oad-install-verify-login">Login</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

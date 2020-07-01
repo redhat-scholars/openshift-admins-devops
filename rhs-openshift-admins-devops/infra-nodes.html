@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/infra-nodes.html">
+    <link rel="prev" href="machinesets.html">
+    <link rel="next" href="app-storage-basics.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="infra-nodes.html">Infrastructure Nodes</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/infra-nodes.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_openshift_infrastructure_nodes"><a class="anchor" href="#_openshift_infrastructure_nodes"></a>OpenShift Infrastructure Nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift subscription model allows customers to run various core
+infrastructure components at no additional charge. In other words, a node
+that is only running core OpenShift infrastructure components is not counted
+in terms of the total number of subscriptions required to cover the
+environment.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift components that fall into the infrastructure categorization
+include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>kubernetes and OpenShift control plane services ("masters")</p>
+</li>
+<li>
+<p>router</p>
+</li>
+<li>
+<p>container image registry</p>
+</li>
+<li>
+<p>cluster metrics collection ("monitoring")</p>
+</li>
+<li>
+<p>cluster aggregated logging</p>
+</li>
+<li>
+<p>service brokers</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Any node running a container/pod/component not described above is considered
+a worker and must be covered by a subscription.</p>
+</div>
+<div class="sect2">
+<h3 id="_more_machineset_details"><a class="anchor" href="#_more_machineset_details"></a>More MachineSet Details</h3>
+<div class="paragraph">
+<p>In the <code>MachineSets</code> exercises you explored using <code>MachineSets</code> and scaling
+the cluster by changing their replica count. In the case of an infrastructure
+node, we want to create additional <code>Machines</code> that have specific Kubernetes
+labels. Then, we can configure the various infrastructure components to run
+specifically on nodes with those labels.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Currently the operators that are used to control infrastructure components do
+not all support the use of taints and tolerations. This means that
+infrastructure workload will go onto the infrastructure nodes, but other
+workload is not specifically prevented from running on the infrastructure
+nodes. In other words, user workload may commingle with infrastructure
+workload until full taint/toleration support is implemented in all operators.</p>
+</div>
+<div class="paragraph">
+<p>The use of taints/tolerations is not covered in any of these exercises.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To accomplish this, you will create additional <code>MachineSets</code>.</p>
+</div>
+<div class="paragraph">
+<p>In order to understand how <code>MachineSets</code> work, run the following.</p>
+</div>
+<div class="paragraph">
+<p>This will allow you to follow along with some of the following discussion.</p>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machineset -n openshift-machine-api -o yaml cluster-5fa6-hx2ml-worker-us-east-2c</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_metadata"><a class="anchor" href="#_metadata"></a>Metadata</h4>
+<div class="paragraph">
+<p>The <code>metadata</code> on the <code>MachineSet</code> itself includes information like the name
+of the <code>MachineSet</code> and various labels.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">metadata:
+  creationTimestamp: 2019-01-25T16:00:34Z
+  generation: 1
+  labels:
+    machine.openshift.io/cluster-api-cluster: 190125-3
+    machine.openshift.io/cluster-api-machine-role: worker
+    machine.openshift.io/cluster-api-machine-type: worker
+  name: 190125-3-worker-us-east-1b
+  namespace: openshift-machine-api
+  resourceVersion: "9027"
+  selfLink: /apis/cluster.k8s.io/v1alpha1/namespaces/openshift-machine-api/machinesets/190125-3-worker-us-east-1b
+  uid: 591b4d06-20ba-11e9-a880-068acb199400</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You might see some <code>annotations</code> on your <code>MachineSet</code> if you dumped
+one that had a <code>MachineAutoScaler</code> defined.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_selector"><a class="anchor" href="#_selector"></a>Selector</h4>
+<div class="paragraph">
+<p>The <code>MachineSet</code> defines how to create <code>Machines</code>, and the <code>Selector</code> tells
+the operator which machines are associated with the set:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: 190125-3
+      machine.openshift.io/cluster-api-machineset: 190125-3-worker-us-east-1b</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the cluster name is <code>190125-3</code> and there is an additional
+label for the whole set.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_template_metadata"><a class="anchor" href="#_template_metadata"></a>Template Metadata</h3>
+<div class="paragraph">
+<p>The <code>template</code> is the part of the <code>MachineSet</code> that templates out the
+<code>Machine</code>. The <code>template</code> itself can have metadata associated, and we need to
+make sure that things match here when we make changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        machine.openshift.io/cluster-api-cluster: 190125-3
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: 190125-3-worker-us-east-1b</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_template_spec"><a class="anchor" href="#_template_spec"></a>Template Spec</h4>
+<div class="paragraph">
+<p>The <code>template</code> needs to specify how the <code>Machine</code>/<code>Node</code> should be created.
+You will notice that the <code>spec</code> and, more specifically, the <code>providerSpec</code>
+contains all of the important AWS data to help get the <code>Machine</code> created
+correctly and bootstrapped.</p>
+</div>
+<div class="paragraph">
+<p>In our case, we want to ensure that the resulting node inherits one or more
+specific labels. As you&#8217;ve seen in the examples above, labels go in
+<code>metadata</code> sections:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">  spec:
+      metadata:
+        creationTimestamp: null
+      providerSpec:
+        value:
+          ami:
+            id: ami-08871aee06d13e584
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default the <code>MachineSets</code> that the installer creates do not apply any
+additional labels to the node.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_defining_a_custom_machineset"><a class="anchor" href="#_defining_a_custom_machineset"></a>Defining a Custom MachineSet</h3>
+<div class="paragraph">
+<p>Now that you&#8217;ve analyzed an existing <code>MachineSet</code> it&#8217;s time to go over the
+rules for creating one, at least for a simple change like we&#8217;re making:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Don&#8217;t change anything in the <code>providerSpec</code></p>
+</li>
+<li>
+<p>Don&#8217;t change any instances of <code>machine.openshift.io/cluster-api-cluster: &lt;clusterid&gt;</code></p>
+</li>
+<li>
+<p>Give your <code>MachineSet</code> a unique <code>name</code></p>
+</li>
+<li>
+<p>Make sure any instances of <code>machine.openshift.io/cluster-api-machineset</code> match the <code>name</code></p>
+</li>
+<li>
+<p>Add labels you want on the nodes to <code>.spec.template.spec.metadata.labels</code></p>
+</li>
+<li>
+<p>Even though you&#8217;re changing <code>MachineSet</code> <code>name</code> references, be sure not to change the <code>subnet</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This sounds complicated, but we have a little program and some steps that
+will do the hard work for you:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">bash {{ HOME_PATH }}/support/machineset-generator.sh 1 infra 0 | oc create -f -
+export MACHINESET=$(oc get machineset -n openshift-machine-api -l machine.openshift.io/cluster-api-machine-role=infra -o jsonpath='{.items[0].metadata.name}')
+oc patch machineset $MACHINESET -n openshift-machine-api --type='json' -p='[{"op": "add", "path": "/spec/template/spec/metadata/labels", "value":{"node-role.kubernetes.io/worker":"", "node-role.kubernetes.io/infra":""} }]'
+oc scale machineset $MACHINESET -n openshift-machine-api --replicas=3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then go ahead and run:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machineset -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the new infra set listed with a name similar to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>...
+cluster-city-56f8-mc4pf-infra-us-east-2a    1         1                             13s
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We don&#8217;t yet have any ready or available machines in the set because the
+instances are still coming up and bootstrapping. You can check <code>oc get
+machine -n openshift-machine-api</code> to see when the instance finally starts
+running. Then, you can use <code>oc get node</code> to see when the actual node is
+joined and ready.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It can take several minutes for a <code>Machine</code> to be prepared and added as a <code>Node</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>NAME                                         STATUS   ROLES          AGE     VERSION
+ip-10-0-133-134.us-east-2.compute.internal   Ready    infra,worker   8m     v1.16.2
+ip-10-0-133-191.us-east-2.compute.internal   Ready    worker         61m    v1.16.2
+ip-10-0-136-83.us-east-2.compute.internal    Ready    master         67m    v1.16.2
+ip-10-0-138-24.us-east-2.compute.internal    Ready    infra,worker   8m1s   v1.16.2
+ip-10-0-139-81.us-east-2.compute.internal    Ready    infra,worker   8m3s   v1.16.2
+ip-10-0-152-132.us-east-2.compute.internal   Ready    worker         61m    v1.16.2
+ip-10-0-157-139.us-east-2.compute.internal   Ready    master         67m    v1.16.2
+ip-10-0-167-9.us-east-2.compute.internal     Ready    worker         61m    v1.16.2
+ip-10-0-169-121.us-east-2.compute.internal   Ready    master         67m    v1.16.2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re having trouble figuring out which node is the new
+one, take a look at the <code>AGE</code> column. It will be the youngest! Also, in the
+<code>ROLES</code> column you will notice that the new node has both a <code>worker</code> and an
+<code>infra</code> role.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_check_the_labels"><a class="anchor" href="#_check_the_labels"></a>Check the Labels</h3>
+<div class="paragraph">
+<p>In our case, the youngest node was named
+<code>ip-10-0-128-138.us-east-1.compute.internal</code>, so we can ask what its labels
+are:</p>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get node ip-10-0-139-81.us-east-2.compute.internal --show-labels</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And, in the <code>LABELS</code> column we see:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>beta.kubernetes.io/arch=amd64,beta.kubernetes.io/instance-type=m5.2xlarge,beta.kubernetes.io/os=linux,failure-domain.beta.kubernetes.io/region=us-east-2,failure-domain.beta.kubernetes.io/zone=us-east-2a,kubernetes.io/arch=amd64,kubernetes.io/hostname=ip-10-0-140-3,kubernetes.io/os=linux,node-role.kubernetes.io/infra=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s hard to see, but our <code>node-role.kubernetes.io/infra</code> label is there.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_more_machinesets_or_scale_or_both"><a class="anchor" href="#_add_more_machinesets_or_scale_or_both"></a>Add More Machinesets (or scale, or both)</h3>
+<div class="paragraph">
+<p>In a realistic production deployment, you would want at least 3 <code>MachineSets</code>
+to hold infrastructure components. Both the logging aggregation solution and
+the service mesh will deploy ElasticSearch, and ElasticSearch really needs 3
+instances spread across 3 discrete nodes. Why 3 <code>MachineSets</code>? Well, in
+theory, having multiple <code>MachineSets</code> in different AZs ensures that you don&#8217;t
+go completely dark if AWS loses an AZ.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MachineSet</code> you created with the scriptlet already created 3 replicas
+for you, so you don&#8217;t have to do anything for now. Don&#8217;t create any
+additional ones yourself, either&#8201;&#8212;&#8201;the AWS limits on the account you are
+using are purposefully small.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_extra_credit"><a class="anchor" href="#_extra_credit"></a>Extra Credit</h3>
+<div class="paragraph">
+<p>In the <code>openshift-machine-api</code> project are several <code>Pods</code>. One of them has a
+name like <code>machine-api-controllers-56bdc6874f-86jnb</code>. If you use <code>oc logs</code> on the
+various containers in that <code>Pod</code>, you will see the various operator bits that
+actually make the nodes come into existence.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quick_operator_background"><a class="anchor" href="#_quick_operator_background"></a>Quick Operator Background</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Operators are just <code>Pods</code>. But they are special <code>Pods</code>. They are software
+that understands how to deploy and manage applications in a Kubernetes
+environment. The power of Operators relies on a recent Kubernetes feature
+called <code>CustomResourceDefinitions</code> (<code>CRD</code>). A <code>CRD</code> is exactly what it sounds
+like. They are a way to define a custom resource which is essentially
+extending the Kubernetes API with new objects.</p>
+</div>
+<div class="paragraph">
+<p>If you wanted to be able to create/read/update/delete <code>Foo</code> objects in
+Kubernetes, you would create a <code>CRD</code> that defines what a <code>Foo</code> resource is and how it
+works. You can then create <code>CustomResources</code> (<code>CRs</code>)&#8201;&#8212;&#8201;instances of your <code>CRD</code>.</p>
+</div>
+<div class="paragraph">
+<p>With Operators, the general pattern is that an Operator looks at <code>CRs</code> for its
+configuration, and then it <em>operates</em> on the Kubernetes environment to do
+whatever the configuration specifies. Now you will take a look at how some of
+the infrastructure operators in OpenShift do their thing.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_moving_infrastructure_components"><a class="anchor" href="#_moving_infrastructure_components"></a>Moving Infrastructure Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that you have some special nodes, it&#8217;s time to move various
+infrastructure components onto them.</p>
+</div>
+<div class="sect2">
+<h3 id="_router"><a class="anchor" href="#_router"></a>Router</h3>
+<div class="paragraph">
+<p>The OpenShift router is managed by an <code>Operator</code> called
+<code>openshift-ingress-operator</code>. Its <code>Pod</code> lives in the
+<code>openshift-ingress-operator</code> project:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod -n openshift-ingress-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The actual default router instance lives in the <code>openshift-ingress</code> project.  Take a look at the <code>Pods</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n openshift-ingress -o wide</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>NAME                              READY   STATUS    RESTARTS   AGE   IP           NODE                                        NOMINATED NODE
+router-default-7bc4c9c5cd-clwqt   1/1     Running   0          9h    10.128.2.7   ip-10-0-144-70.us-east-2.compute.internal   &lt;none&gt;
+router-default-7bc4c9c5cd-fq7m2   1/1     Running   0          9h    10.131.0.7   ip-10-0-138-38.us-east-2.compute.internal   &lt;none&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Review a <code>Node</code> on which a router is running:</p>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get node ip-10-0-144-70.us-east-2.compute.internal</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see that it has the role of <code>worker</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>NAME                                        STATUS   ROLES    AGE   VERSION
+ip-10-0-144-70.us-east-2.compute.internal   Ready    worker   9h    v1.12.4+509916ce1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The default configuration of the router operator is to
+pick nodes with the role of <code>worker</code>. But, now that we have created dedicated
+infrastructure nodes, we want to tell the operator to put the router
+instances on nodes with the role of <code>infra</code>.</p>
+</div>
+<div class="paragraph">
+<p>The OpenShift router operator uses a custom resource definition (<code>CRD</code>)
+called <code>ingresses.config.openshift.io</code> to define the default routing
+subdomain for the cluster:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get ingresses.config.openshift.io cluster -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>cluster</code> object is observed by the router operator as well as the
+master. Yours likely looks something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: config.openshift.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: 2019-04-08T14:37:49Z
+  generation: 1
+  name: cluster
+  resourceVersion: "396"
+  selfLink: /apis/config.openshift.io/v1/ingresses/cluster
+  uid: e1ec463c-5a0b-11e9-93e8-028b0fb1636c
+spec:
+  domain: {{ ROUTE_SUBDOMAIN }}
+status: {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Individual router deployments are managed via the
+<code>ingresscontrollers.operator.openshift.io</code> CRD. There is a default one
+created in the <code>openshift-ingress-operator</code> namespace:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get ingresscontrollers.operator.openshift.io default -n openshift-ingress-operator -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yours looks something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  creationTimestamp: 2019-04-08T14:46:15Z
+  finalizers:
+  - ingress.openshift.io/ingress-controller
+  generation: 2
+  name: default
+  namespace: openshift-ingress-operator
+  resourceVersion: "2056085"
+  selfLink: /apis/operator.openshift.io/v1/namespaces/openshift-ingress-operator/ingresscontrollers/default
+  uid: 0fac160d-5a0d-11e9-a3bb-02d64e703494
+spec: {}
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: 2019-04-08T14:47:14Z
+    status: "True"
+    type: Available
+  domain: apps.cluster-f4a3.f4a3.openshiftworkshop.com
+  endpointPublishingStrategy:
+    type: LoadBalancerService
+  selector: ingress.operator.openshift.io/ingress-controller-deployment=default</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To specify a <code>nodeSelector</code> that tells the router pods to hit the
+infrastructure nodes, we can apply the following configuration:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc apply -f {{ HOME_PATH }}/support/ingresscontroller.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod -n openshift-ingress -o wide</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Your session may timeout during the router move. Please refresh the page to
+get your session back. You will not lose your terminal session but may have
+to navigate back to this page manually.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re quick enough, you might catch either <code>Terminating</code> or
+<code>ContainerCreating</code> pods. The <code>Terminating</code> pod was running on one of the
+worker nodes. The <code>Running</code> pods eventually are on one of our nodes with the
+<code>infra</code> role.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_registry"><a class="anchor" href="#_registry"></a>Registry</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The registry uses a similar <code>CRD</code> mechanism to configure how the operator
+deploys the actual registry pods. That CRD is
+<code>configs.imageregistry.operator.openshift.io</code>. You will edit the <code>cluster</code> CR
+object in order to add the <code>nodeSelector</code>. First, take a look at it:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get configs.imageregistry.operator.openshift.io/cluster -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-YAML hljs" data-lang="YAML">apiVersion: imageregistry.operator.openshift.io/v1
+kind: Config
+metadata:
+  creationTimestamp: "2019-08-06T13:57:22Z"
+  finalizers:
+  - imageregistry.operator.openshift.io/finalizer
+  generation: 2
+  name: cluster
+  resourceVersion: "13218"
+  selfLink: /apis/imageregistry.operator.openshift.io/v1/configs/cluster
+  uid: 1cb6272a-b852-11e9-9a54-02fdf1f6ca7a
+spec:
+  defaultRoute: false
+  httpSecret: fff8bb0952d32e0aa56adf0ac6f6cf5267e0627f7b42e35c508050b5be426f8fd5e5108bea314f4291eeacc0b95a2ea9f842b54d7eb61522238f2a2dc471f131
+  logging: 2
+  managementState: Managed
+  proxy:
+    http: ""
+    https: ""
+    noProxy: ""
+  readOnly: false
+  replicas: 1
+  requests:
+    read:
+      maxInQueue: 0
+      maxRunning: 0
+      maxWaitInQueue: 0s
+    write:
+      maxInQueue: 0
+      maxRunning: 0
+      maxWaitInQueue: 0s
+  storage:
+    s3:
+      bucket: image-registry-us-east-2-0a598598fc1649d8b96ed91a902b982c-1cbd
+      encrypt: true
+      keyID: ""
+      region: us-east-2
+      regionEndpoint: ""
+status:
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you run the following command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch configs.imageregistry.operator.openshift.io/cluster -p '{"spec":{"nodeSelector":{"node-role.kubernetes.io/infra": ""}}}' --type=merge</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It will modify the <code>.spec</code> of the registry CR in order to add the desired <code>nodeSelector</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>At this time the image registry is not using a separate project for its
+operator. Both the operator and the operand are housed in the
+<code>openshift-image-registry</code> project.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After you run the patch command you should see the registry pod being moved to the
+infra node. The registry is in the <code>openshift-image-registry</code> project. If you
+execute the following quickly enough:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod -n openshift-image-registry</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You might see the old registry pod terminating and the new one starting.
+Since the registry is being backed by an S3 bucket, it doesn&#8217;t matter what
+node the new registry pod instance lands on. It&#8217;s talking to an object store
+via an API, so any existing images stored there will remain accessible.</p>
+</div>
+<div class="paragraph">
+<p>Also note that the default replica count is 1. In a real-world environment
+you might wish to scale that up for better availability, network throughput,
+or other reasons.</p>
+</div>
+<div class="paragraph">
+<p>If you look at the node on which the registry landed (see the section on the
+router), you&#8217;ll note that it is now running on an infra worker.</p>
+</div>
+<div class="paragraph">
+<p>Lastly, notice that the <code>CRD</code> for the image registry&#8217;s configuration is not
+namespaced&#8201;&#8212;&#8201;it is cluster scoped. There is only one internal/integrated
+registry per OpenShift cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_monitoring"><a class="anchor" href="#_monitoring"></a>Monitoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Cluster Monitoring operator is responsible for deploying and managing the
+state of the Prometheus+Grafana+AlertManager cluster monitoring stack. It is
+installed by default during the initial cluster installation. Its operator
+uses a <code>ConfigMap</code> in the <code>openshift-monitoring</code> project to set various
+tunables and settings for the behavior of the monitoring stack.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>ConfigMap</code> definition will configure the monitoring
+solution to be redeployed onto infrastructure nodes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |+
+    alertmanagerMain:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    prometheusK8s:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    grafana:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    k8sPrometheusAdapter:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    kubeStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+    telemeterClient:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is no <code>ConfigMap</code> created as part of the installation. Without one, the operator will assume
+default settings. Verify the <code>ConfigMap</code> is not defined in your cluster:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get configmap cluster-monitoring-config -n openshift-monitoring</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>Error from server (NotFound): configmaps "cluster-monitoring-config" not found</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator will, in turn, create several <code>ConfigMap</code> objects for the
+various monitoring stack components, and you can see them, too:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get configmap -n openshift-monitoring</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can create the new monitoring config with the following command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f {{ HOME_PATH }}/support/cluster-monitoring-configmap.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Watch the monitoring pods move from <code>worker</code> to <code>infra</code> <code>Nodes</code> with:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">watch 'oc get pod -n openshift-monitoring'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod -w -n openshift-monitoring</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging"><a class="anchor" href="#_logging"></a>Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift&#8217;s log aggregation solution is not installed by default. There is a
+dedicated lab exercise that goes through the configuration and deployment of
+logging.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="machinesets.html">Machine Sets</a></span>
+  <span class="next"><a href="app-storage-basics.html">Storage Basics</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

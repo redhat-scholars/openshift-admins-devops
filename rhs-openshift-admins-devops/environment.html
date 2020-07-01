@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/environment.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/environment.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_environment_overview"><a class="anchor" href="#_environment_overview"></a>Environment Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You will be interacting with an OpenShift 4 cluster that is running on {{
+ENVIRONMENT }}. During the lab you will also install OpenShift Container
+Storage, based on Rook/Ceph.</p>
+</div>
+<div class="paragraph">
+<p>The basics of the OpenShift 4 installation have been completed in advance.
+The OpenShift cluster is essentially set to all defaults and looks like the
+following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3 master nodes</p>
+</li>
+<li>
+<p>3 worker nodes</p>
+</li>
+<li>
+<p>1 bastion host</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/openshift-labs/workshop-dashboard">Homeroom</a> is a
+solution that provides this integrated lab guide, terminal, and web console
+pane. It is actually running inside the cluster that you will be interacting
+with.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You will see various code and command blocks throughout these exercises. Some of
+the command blocks can be executed directly. Others will require modification
+of the command before execution. If you see a command block with a red border
+(see below), the command will copy to clipboard for slight required modification.</p>
+</div>
+<div class="paragraph">
+<p>The icon beside the command blocks should tell you if the commands will be executed or copied.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>This command block will be copied to your clipboard for modification.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs" data-lang="none">some command to modify</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To paste the copied command try the following</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cmd + V <em>tested to work in Chrome on macOS</em></p>
+</li>
+<li>
+<p>Ctrl + Shift + V <em>tested to work in Chrome and Firefox on Windows 10</em></p>
+</li>
+<li>
+<p>Right click + paste in the terminal window <em>tested to work on Edge on Windows 10</em></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>This will execute in the console</p>
+</li>
+</ul>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs" data-lang="none">echo Hello World\!</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Most command blocks support auto highlighting or executing with a click. If
+you hover over the command block above and left-click, it should
+automatically highlight all the text to make for easier copying. Look at the
+symbol next to the block to see if it will copy or execute.</p>
+</div>
+<div class="sect2">
+<h3 id="_cluster_admin_authentication"><a class="anchor" href="#_cluster_admin_authentication"></a>Cluster Admin Authentication</h3>
+<div class="paragraph">
+<p>The login you provided to access this lab guide actually has nothing to do
+with the terminal or web console you will interact with. We use a feature of
+Kubernetes called <code>ServiceAccounts</code> which are non-human user accounts. The
+terminal and web console tabs are interacting with the OpenShift API using
+one of these <code>ServiceAccounts</code>, and that account has been given the
+<em>cluster-admin</em> <code>ClusterRole</code>. This allows the terminal and web console to
+perform administrative / privileged actions against the APIs.</p>
+</div>
+<div class="paragraph">
+<p>Privileges in OpenShift are controlled through a set of roles, policies, and
+bindings which you will learn more about in one of the exercises in this
+workshop.</p>
+</div>
+<div class="paragraph">
+<p>As a quick example, you can execute the following to learn more about what a
+<code>Role</code> is:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc explain Role</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inspect how <code>ClusterRole</code> differs:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc explain ClusterRole</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can execute the following to learn more about <code>RoleBinding</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc explain RoleBinding</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Inspect how <code>ClusterRoleBinding</code> differs:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc explain ClusterRoleBinding</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can always use <code>oc explain [RESOURCE]</code> to get more explanation about what
+various objects are.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at PolicyRules defined in the <code>ClusterRole</code> <em>cluster-admin</em>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterrole cluster-admin -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how under rules, an account with the <em>cluster-admin</em> role has
+wildcard <code>*</code> access to all <code>resources</code> and <code>verbs</code> of an apiGroup and all
+<code>verbs</code> in <code>nonResourceURLs</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>verbs</code> are actions that you perform against resources. Things like <code>delete</code>
+and <code>get</code> are <code>verbs</code> in OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>To learn more about certain verbs, run <code>oc [verb] --help</code></p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s learn more about the <code>verb</code> <em>whoami</em>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami --help</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will now run <code>oc whoami</code> to see what account you will be using today:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s inspect <em>dashboard-cluster-admin</em> <code>ClusterRoleBinding</code> that gave our
+<code>ServiceAccount</code> <em>cluster-admin</em> <code>ClusterRole</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterrolebinding dashboard-cluster-admin -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that our <code>ServiceAccount</code> is a subject in this <code>ClusterRoleBinding</code>
+with a role referenced being the <em>cluster-admin</em> <code>ClusterRole</code></p>
+</div>
+<div class="paragraph">
+<p>As a cluster-admin throughout the exercises, you will be able to do anything
+with the cluster as you have noted earlier, so follow instructions carefully.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

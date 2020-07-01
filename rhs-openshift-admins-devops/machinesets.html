@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/machinesets.html">
+    <link rel="prev" href="template-quota-limits.html">
+    <link rel="next" href="infra-nodes.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="machinesets.html">Machine Sets</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/machinesets.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_machinesets_machines_and_nodes"><a class="anchor" href="#_machinesets_machines_and_nodes"></a>MachineSets, Machines, and Nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Kubernetes <code>Nodes</code> are where containers are orchestrated and run in <code>Pods</code>.
+OpenShift 4 is fundamentally different than OpenShift 3 with respect to its
+focus on automated operations through the use of <code>Operators</code>. With respect
+to <code>Nodes</code>, there is a set of <code>Operators</code> and controllers that are focused on
+maintaining the state of the cluster size&#8201;&#8212;&#8201;including creating and
+destroying <code>Nodes</code>!</p>
+</div>
+<div class="sect2">
+<h3 id="_machinesets_and_machines"><a class="anchor" href="#_machinesets_and_machines"></a>MachineSets and Machines</h3>
+<div class="paragraph">
+<p>As you saw in the application management exercises, there is a basic
+fundamental relationship between a <code>ReplicaSet</code>/<code>ReplicationController</code> and
+the <code>Pods</code> it creates. Similarly, there is a relationship between a
+<code>MachineSet</code> and a <code>Machine</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>MachineSet</code> defines a desired state for a set of <code>Machine</code> objects. When
+using IPI installations, then, there is an <code>Operator</code> whose job it is to make
+sure that there is actually an underlying instance for each <code>Machine</code> and,
+finally, that every <code>Machine</code> becomes a <code>Node</code>.</p>
+</div>
+<div class="paragraph">
+<p>Execute the following:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machineset -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                   DESIRED   CURRENT   READY   AVAILABLE   AGE
+cluster-f4a3-lpxbs-worker-us-east-2a   1         1         1       1           47h
+cluster-f4a3-lpxbs-worker-us-east-2b   1         1         1       1           47h
+cluster-f4a3-lpxbs-worker-us-east-2c   1         1         1       1           47h</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When OpenShift was installed, the installer interrogated the cloud provider
+to learn about the available AZs (since this is on AWS). It then ultimately
+created a <code>MachineSet</code> for each AZ and then scaled those sets, in order,
+until it reached the desired number of <code>Machines</code>. Since the default
+installation has 3 workers, the first 3 AZs got one worker each. The rest got
+zero.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machine -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                         INSTANCE              STATE     TYPE         REGION      ZONE         AGE
+cluster-f4a3-lpxbs-master-0                  i-04280885cafad3130   running   m4.xlarge    us-east-2   us-east-2a   47h
+cluster-f4a3-lpxbs-master-1                  i-0def910edcae51d11   running   m4.xlarge    us-east-2   us-east-2b   47h
+cluster-f4a3-lpxbs-master-2                  i-0beb5e40214d706fc   running   m4.xlarge    us-east-2   us-east-2c   47h
+cluster-f4a3-lpxbs-worker-us-east-2a-b94pr   i-0a922c0fe765caa3c   running   m5.2xlarge   us-east-2   us-east-2a   47h
+cluster-f4a3-lpxbs-worker-us-east-2b-m8gbx   i-0fb8d960b8a3a3343   running   m5.2xlarge   us-east-2   us-east-2b   47h
+cluster-f4a3-lpxbs-worker-us-east-2c-5tmg7   i-0151c72cd85f85038   running   m5.2xlarge   us-east-2   us-east-2c   47h</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each <code>Machine</code> has a corresponding <code>INSTANCE</code>. Do those IDs look familiar?
+They are AWS EC2 instance IDs. You also see <code>Machines</code> for the OpenShift
+masters. They are not part of a <code>MachineSet</code> because they are somewhat
+stateful and their management is handled by different operators and through a
+different process.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There is currently no protection for the master <code>Machines</code>. Do not
+accidentally or intentionally delete them, as this will potentially break
+your cluster. It is repairable, but it is not fun.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Lastly, execute:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                         STATUS   ROLES    AGE   VERSION
+ip-10-0-133-191.us-east-2.compute.internal   Ready    worker   44m   v1.16.2
+ip-10-0-136-83.us-east-2.compute.internal    Ready    master   51m   v1.16.2
+ip-10-0-152-132.us-east-2.compute.internal   Ready    worker   44m   v1.16.2
+ip-10-0-157-139.us-east-2.compute.internal   Ready    master   51m   v1.16.2
+ip-10-0-167-9.us-east-2.compute.internal     Ready    worker   44m   v1.16.2
+ip-10-0-169-121.us-east-2.compute.internal   Ready    master   51m   v1.16.2</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each <code>Machine</code> ends up corresponding to a <code>Node</code>. With IPI, there is a
+bootstrap process where the machine operator will create an EC2 instance and
+then Ignition inside the CoreOS operating system will receive initial
+instructions from the operator. This results in the EC2 instance being
+configured as an OpenShift node and joining the cluster.</p>
+</div>
+<div class="paragraph">
+<p>If you spend some time using <code>oc describe</code> and the various <code>Machine</code> and
+<code>Node</code> objects, you will figure out which ones correlate with which.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cluster_scaling"><a class="anchor" href="#_cluster_scaling"></a>Cluster Scaling</h3>
+<div class="paragraph">
+<p>Because of the magic of <code>Operators</code> and the way in which OpenShift uses them
+to manage <code>Machines</code> and <code>Nodes</code>, scaling your cluster in OpenShift 4 is
+extremely trivial.</p>
+</div>
+<div class="paragraph">
+<p>Look at the list of <code>MachineSets</code> again:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machineset -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Within that list, find the <code>MachineSet</code> that ends in <code>-2c</code>. It should have a
+scale of one. Now, let&#8217;s scale it to have two instances:</p>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale machineset cluster-5fa6-hx2ml-worker-us-east-2c -n openshift-machine-api --replicas=2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take special note because your <code>MachineSet</code> name is likely different from the
+one in the lab guide. You should see a note that the <code>MachineSet</code> was
+successfully scaled. Now, look at the list of <code>Machines</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get machines -n openshift-machine-api</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You probably already have a new entry for a <code>Machine</code> with a <code>STATE</code> of
+<code>Pending</code>. After a few moments, it will have a corresponding EC2 instance ID
+and will look something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cluster-f4a3-lpxbs-worker-us-east-2c-h7gdt   i-0b9208ec47f0e206b   running   m5.2xlarge     us-east-2   us-east-2c   47s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, in the background, the bootstrap process is happening
+automatically. After several minutes (up to five or so), take a look at the
+output of:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see your fresh and happy new node as the one with a very young age:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ip-10-0-166-103.us-east-2.compute.internal   Ready    worker   1m   v1.16.2</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It can take several minutes for a <code>Machine</code> to be prepared and added as a <code>Node</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Scale the <code>MachineSet</code> from two back down to one before continuing.</p>
+</div>
+<div class="listingblock copypaste copypaste-warning">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale machineset cluster-5fa6-hx2ml-worker-us-east-2c -n openshift-machine-api --replicas=1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="template-quota-limits.html">Project Request Template</a></span>
+  <span class="next"><a href="infra-nodes.html">Infrastructure Nodes</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

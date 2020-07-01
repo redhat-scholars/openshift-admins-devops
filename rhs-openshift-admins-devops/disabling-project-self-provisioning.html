@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/disabling-project-self-provisioning.html">
+    <link rel="prev" href="cluster-metering.html">
+    <link rel="next" href="networking.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="disabling-project-self-provisioning.html">Disable Project Provisioning</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/disabling-project-self-provisioning.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_disabling_project_self_provisioning"><a class="anchor" href="#_disabling_project_self_provisioning"></a>Disabling Project Self-Provisioning</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before continuing, make sure you&#8217;ve done the LDAP lab.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>OpenShift, by default, allows authenticated users to create <strong>Projects</strong> to
+loggically house their applications. This feature enables admins to provide a
+"self service" feature that was popularized by the advent of the "PaaS"
+(Platform as a Service) model.</p>
+</div>
+<div class="paragraph">
+<p>This feature may not be suitable for all sitations, and many administrators
+may want to have more control over Projects and who (if anyone) can create
+them. Some of these use cases may be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Environment Protection - Administrators may not want Projects getting created
+without their knowledge.</p>
+</li>
+<li>
+<p>Resource Allocation - Administrator may want fine grained control over
+resource allocation (i.e. "I don&#8217;t want to overcommit")</p>
+</li>
+<li>
+<p>Quota flexibility - Default quotas may be set, but Administrators may want to
+specify additional quotas (or fewer) depending on the Project scope.</p>
+</li>
+<li>
+<p>Accounting and Chargeback - In a multitenant system, there may be a need to
+do accounting and chargeback.</p>
+</li>
+<li>
+<p>General Administrative Control - Administrators may want total control in
+what goes in an environment.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There are other ways to gain this type of control besides disabling Project self-provisioning.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_background_projects"><a class="anchor" href="#_background_projects"></a>Background: Projects</h3>
+<div class="paragraph">
+<p>What are you disabling exactly? In a previous lab, you learned that a Project
+is a "bucket" of sorts; which holds all the resources for an application. You
+also learned that Projects can be assigned to a user or group for
+collaboration. But what&#8217;s the difference between a Project and a Kubernetes
+Namespace?</p>
+</div>
+<div class="paragraph">
+<p>A Project directly maps to a Kubernetes Namespace. It also maps to the
+internal registry&#8217;s namespace as well as to a VXLAN VNID. So giving access to
+a Project does more than let users collaborate. You are allowing network
+communications, regestry namespace access, and access to objects within a
+Kubernetes Namespace.</p>
+</div>
+<div class="sect3">
+<h4 id="_examine_the_clusterrolebinding"><a class="anchor" href="#_examine_the_clusterrolebinding"></a>Examine the Clusterrolebinding</h4>
+<div class="paragraph">
+<p>In order to examine the <code>clusterrolebinding</code> for <code>self-provisioners</code>; you
+need to be <strong>kubeadmin</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You could also use the serviceaccount user that we&#8217;ve used in previous labs.
+Since <code>kubeadmin</code> and the service account user both have the <code>cluster-admin</code>
+role, it really doesn&#8217;t matter.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>View the <code>self-provisioners</code> cluster role binding usage by running the <code>oc describe</code> command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe clusterrolebinding.rbac self-provisioners</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name:         self-provisioners
+Labels:       &lt;none&gt;
+Annotations:  rbac.authorization.kubernetes.io/autoupdate: true
+Role:
+  Kind:  ClusterRole
+  Name:  self-provisioner
+Subjects:
+  Kind   Name                        Namespace
+  ----   ----                        ---------
+  Group  system:authenticated:oauth</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, it&#8217;s saying that the group <code>system:authenticated:oauth</code> (which is a
+group that every user that has authenticated is a part of, by default), is
+bound to the <code>self-provisioners</code> role. This role is a built-in role in
+OpenShift that allows the users to create projects.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you are interested in the different roles that come with OpenShift, you
+can learn more about them in the
+<a href="https://docs.openshift.com/container-platform/4.1/authentication/using-rbac.html" target="_blank" rel="noopener">role-based
+access control (RBAC)</a> documentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>To view the configuration itself, inspect the yaml by running the following:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterrolebinding.rbac self-provisioners -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration should look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  creationTimestamp: "2019-10-30T22:08:21Z"
+  name: self-provisioners
+  resourceVersion: "6712"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/self-provisioners
+  uid: c9117fdf-fb61-11e9-96cb-00505693eda8
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: self-provisioner
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated:oauth</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_removing_self_provisioning_projects"><a class="anchor" href="#_removing_self_provisioning_projects"></a>Removing Self Provisioning Projects</h4>
+<div class="paragraph">
+<p>To remove the <code>self-provisioner</code> cluster role from the group
+<code>system:authenticated:oauth</code> you need to remove that group from the role
+binding.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch clusterrolebinding.rbac self-provisioners -p '{"subjects": null}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Automatic updates reset the cluster roles to a default state. In order to
+disable this, you need to set the annotation
+<code>rbac.authorization.kubernetes.io/autoupdate</code> to <code>false</code> by running:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch clusterrolebinding.rbac self-provisioners -p '{ "metadata": { "annotations": { "rbac.authorization.kubernetes.io/autoupdate": "false" } } }'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>View the new configuration:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterrolebinding.rbac self-provisioners -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should now have no <code>subjects</code> in the YAML. It should look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "false"
+  creationTimestamp: "2019-10-30T22:08:21Z"
+  name: self-provisioners
+  resourceVersion: "4408134"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/self-provisioners
+  uid: c9117fdf-fb61-11e9-96cb-00505693eda8
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: self-provisioner</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Test this by logging in as <code>fancyuser1</code> and try to create a project.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u fancyuser1 -p Op#nSh1ft
+oc new-project fancyuserproject</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see an error message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Error from server (Forbidden): You may not request a new project via this API.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Login as the <code>kubeadmin</code> user for the next exercise.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_customizing_the_request_message"><a class="anchor" href="#_customizing_the_request_message"></a>Customizing the request message</h4>
+<div class="paragraph">
+<p>Now any time a user tries to create a project they will be greated with the
+same message <code>You may not request a new project via this API</code>. You can
+customize this message to give a more meaningful call to action.</p>
+</div>
+<div class="paragraph">
+<p>For example, you can have the users submit a ticket requesting a project. We
+can do this by changing the text given, to include instructions:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch --type=merge project.config.openshift.io cluster -p '{"spec":{"projectRequestMessage":"Please visit https://ticket.example.com to request a project"}}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, you are adding the <code>projectRequestMessage</code> and the value <code>Please visit
+<a href="https://ticket.example.com" class="bare">https://ticket.example.com</a> to request a project</code> to the specification.</p>
+</div>
+<div class="paragraph">
+<p>Now, the user will get this message when trying to create a project. Test
+this by becoming <code>fancyuser1</code> and try to create a project.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u fancyuser1 -p Op#nSh1ft
+oc new-project fancyuserproject</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Error from server (Forbidden): Please visit https://ticket.example.com to request a project</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It may take some time before the operator updates the master config, which
+means it could take some time before you see the new message. Wait a few
+moments and try again.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project fancyuserproject</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clean_up"><a class="anchor" href="#_clean_up"></a>Clean Up</h4>
+<div class="paragraph">
+<p>Make sure you login as <code>kubeadmin</code> for the next lab.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other labs may require the <code>self-provisioners</code> role, so let&#8217;s undo what we did:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch clusterrolebinding.rbac self-provisioners -p '{"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"system:authenticated:oauth"}]}'
+oc patch clusterrolebinding.rbac self-provisioners -p '{"metadata":{"annotations":{"rbac.authorization.kubernetes.io/autoupdate":"true"}}}'
+oc patch --type=json project.config.openshift.io cluster -p '[{"op": "remove", "path": "/spec/projectRequestMessage"}]'</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="cluster-metering.html">Cluster Metering</a></span>
+  <span class="next"><a href="networking.html">Networking</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

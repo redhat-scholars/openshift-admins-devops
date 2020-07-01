@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/monitoring-basics.html">
+    <link rel="prev" href="logging.html">
+    <link rel="next" href="#quotas.adoc">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="monitoring-basics.html">Monitoring</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/monitoring-basics.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_openshift_monitoring"><a class="anchor" href="#_openshift_monitoring"></a>OpenShift Monitoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab you will explore various aspects of the builtin OpenShift
+Monitoring. This includes an overview of the OpenShift Alertmanager UI,
+accessing the Prometheus web console, running PromQL (Prometheuses Query
+Language) queries to inspect the cluster and finally looking at Grafana
+dashboards.</p>
+</div>
+<div class="sect2">
+<h3 id="_openshift_monitoring_2"><a class="anchor" href="#_openshift_monitoring_2"></a>OpenShift Monitoring</h3>
+<div class="paragraph">
+<p>OpenShift Container Platform includes a pre-configured, pre-installed, and
+self-updating monitoring stack that is based on the Prometheus open source
+project and its wider eco-system. It provides monitoring of cluster
+components and includes a set of alerts to immediately notify the cluster
+administrator about any occurring problems and a set of Grafana dashboards.
+The cluster monitoring stack is only supported for monitoring OpenShift
+Container Platform clusters.</p>
+</div>
+<div class="sect3">
+<h4 id="_examine_alerting_configuration"><a class="anchor" href="#_examine_alerting_configuration"></a>Examine Alerting Configuration</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to the link:{{ MASTER_URL }}[OpenShift Web Console] with the kubeadmin credentials.</p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>kubeadmin</code></pre>
+</div>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>{{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will receive a self-signed certificate error in your browser when you
+first visit the OpenShift Web console. When OpenShift is installed, by default, a CA
+and SSL certificates are generated for all inter-component communication
+within OpenShift, including the web console.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>On the left hand side, click on the "Monitoring" drop down.</p>
+</li>
+<li>
+<p>Click on "Alerting". This is the OpenShift console&#8217;s view of the alert configuration.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The Alerting tab shows you information about currently configured and/or
+active alerts. You can see and do several things:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Filter alerts by their names.</p>
+</li>
+<li>
+<p>Filter the alerts by their states. To fire, some alerts need a certain
+condition to be true for the duration of a timeout. If a condition of an
+alert is currently true, but the timeout has not been reached, such an alert
+is in the Pending state.</p>
+</li>
+<li>
+<p>Alert name.</p>
+</li>
+<li>
+<p>Description of an alert.</p>
+</li>
+<li>
+<p>Current state of the alert and when the alert went into this state.</p>
+</li>
+<li>
+<p>Value of the Severity label of the alert.</p>
+</li>
+<li>
+<p>Actions you can do with the alert.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll also note that you can click directly into the Alertmanager UI with a
+link that&#8217;s at the top of this page.</p>
+</div>
+<div class="sect4">
+<h5 id="_metrics_ui_prometheus_console"><a class="anchor" href="#_metrics_ui_prometheus_console"></a>Metrics UI (Prometheus Console)</h5>
+<div class="paragraph">
+<p>In addition to the Alerting screen, OpenShift&#8217;s built-in monitoring provides
+an interface to access metrics collected by Prometheus using the <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">Prometheus
+Query Language (PromQL)</a>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the left hand side of the OpenShift Console, under the "Monitoring" section, click the link for "Metrics".</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_running_prometheus_queries"><a class="anchor" href="#_running_prometheus_queries"></a>Running Prometheus Queries</h5>
+<div class="paragraph">
+<p>Let&#8217;s run a query to see the resources memory limit all pod definitions have defined.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copy and paste the following query into the expression text box:</p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>sum(kube_pod_container_resource_limits_memory_bytes)/(1024^3)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click the "Run Queries" button</p>
+</li>
+<li>
+<p>You should now see a timeseries with a value in the list. This value is
+the latest gathered value for the timeseries as defined by this query.
+You will also see a graph showing the value over the last time period (defaults to 30m).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s run a query to see the cpu usage for the entire cluster.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click "Add Query"</p>
+</li>
+<li>
+<p>Copy and paste the following query into the query text box:</p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>cluster:cpu_usage_cores:sum</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click the "Run Queries" button</p>
+</li>
+<li>
+<p>You should now see a timeseries with a value in the list. This value is
+the latest gathered value for the timeseries as defined by this query.
+You&#8217;ll also see that your new query got plotted on the same graph.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The metrics interface lets you run powerful queries on the information
+collected about your cluster.</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll also note that you can click directly into the Prometheus UI with a
+link that&#8217;s at the top of this page.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dashboards_ui_grafana"><a class="anchor" href="#_dashboards_ui_grafana"></a>Dashboards UI (Grafana)</h5>
+<div class="paragraph">
+<p>In addition to the Metrics UI, OpenShift monitoring provides a preconfigured
+"Dashboards" UI (aka "Grafana"). The purpose of these Dashboards is to show
+multiple metrics in easy to consume form graphed over time.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click the "Dashboards" link under the "Monitoring" section on the left hand side.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will receive a self-signed certificate error in your browser when you
+first visit the Dashboards UI console. When OpenShift is installed, by default, a CA
+and SSL certificates are generated for all inter-component communication
+within OpenShift, including the Grafana dashboard.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Click "Log in with OpenShift" button.</p>
+</li>
+<li>
+<p>Click "kube:admin" if the option is provided.</p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>kubeadmin</code></pre>
+</div>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>{{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>On the "Authorize Access" page, click the "Allow selected permissions" button.</p>
+</li>
+<li>
+<p>This is the Grafana "Home Dashboard" page.</p>
+</li>
+<li>
+<p>Click on the "Home" dropdown at the top of the page</p>
+</li>
+<li>
+<p>Select the "Kubernetes / Compute Resources / Cluster" dashboard.
+The "Kubernetes / Compute Resources / Cluster" dashbard shows an overview
+of the resources currently committed and actively being used by the
+cluster.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/images/grafana_dashboard.png" alt="grafana dashboard">
+</div>
+<div class="title">Figure 1. Dashboards UI (Grafana)</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="logging.html">Logging</a></span>
+  <span class="next"><a href="#quotas.adoc">Quotas</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

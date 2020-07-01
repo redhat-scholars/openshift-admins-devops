@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/clusterresourcequota.html">
+    <link rel="prev" href="#quotas.adoc">
+    <link rel="next" href="template-quota-limits.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="#quotas.adoc">Quotas</a></li>
+    <li><a href="clusterresourcequota.html">Cluster Resource Quotas</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/clusterresourcequota.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_cluster_resource_quotas"><a class="anchor" href="#_cluster_resource_quotas"></a>Cluster resource quotas</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before continuing, make sure you&#8217;ve done the LDAP lab.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In a previous lab, you worked with quotas and saw how they could be applied to projects. You also set up default quotas, so anytime someone requests a new project; they get assigned the default quota. These project quotas are great for maintaining control over the resources in your cluster.</p>
+</div>
+<div class="paragraph">
+<p>But what if you want to apply a quota not to individual projects, but accross projects?</p>
+</div>
+<div class="sect2">
+<h3 id="_use_cases"><a class="anchor" href="#_use_cases"></a>Use cases</h3>
+<div class="paragraph">
+<p>There are two primary usecases where you would use <code>clusterresourcequota</code> instead of a project based <code>quota</code>. One of which, is when you want to set quotas on a specific user. This is useful when you want users to create as much projects as they need (thus achiving great multitenancy), but you want to limit the amount of resource they can consume.</p>
+</div>
+<div class="paragraph">
+<p>The other use case is if you want to set a quota by application vertical. In this case, you want to set the quota on an application stack wholistically; as an application stack can span multiple OpenShift Projects.</p>
+</div>
+<div class="paragraph">
+<p>In this lab, we will be exploring both use cases.</p>
+</div>
+<div class="sect3">
+<h4 id="_setting_quota_per_user"><a class="anchor" href="#_setting_quota_per_user"></a>Setting quota per user</h4>
+<div class="paragraph">
+<p>In order to set a <code>clusterresourcequota</code> to a user you need to be <code>kubeadmin</code></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, set a quota for the <code>normaluser1</code>. We will be using the <code>annotation</code> key of <code>openshift.io/requester=</code> to identify the projects that will have these quotas assigned to. For this exercise, we will set a hard quota against creating more than 10 pods.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create clusterquota for-user-normaluser1 \
+    --project-annotation-selector openshift.io/requester=normaluser1 \
+    --hard pods=10</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The syntax is <code>openshift.io/requester=&lt;username&gt;</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>View the configuration.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get clusterresourcequotas for-user-normaluser1 -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The configuration should look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: quota.openshift.io/v1
+kind: ClusterResourceQuota
+metadata:
+  creationTimestamp: "2019-11-22T01:29:06Z"
+  generation: 1
+  name: for-user-normaluser1
+  resourceVersion: "73824"
+  selfLink: /apis/quota.openshift.io/v1/clusterresourcequotas/for-user-normaluser1
+  uid: 79764862-0cc7-11ea-bba7-0640f541f946
+spec:
+  quota:
+    hard:
+      pods: "10"
+  selector:
+    annotations:
+      openshift.io/requester: normaluser1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This user, <code>normaluser1</code>, can create no more than 10 pods accross all the projects he creates. This applies only to projects that he as created (based on the <code>openshift.io/requester: normaluser1</code> annotation), not any projects he has access to. More on this later.</p>
+</div>
+<div class="paragraph">
+<p>Now, login as <code>normaluser1</code></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List all your current projects</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get projects</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This user shouldn&#8217;t have any projects, and you should see output similar to this (don&#8217;t worry if you do though):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>No resources found.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create two projects <code>welcome1</code> and <code>welcome2</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-project welcome1
+oc new-project welcome2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll be creating two applications. One in the <code>welcome1</code> project and the other in the <code>welcome2</code> project.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app -n welcome1 --name=php1 quay.io/redhatworkshops/welcome-php:latest
+oc new-app -n welcome2 --name=php2 quay.io/redhatworkshops/welcome-php:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the deployment, you should have two running pods. One in each namespace. Check it with the <code>oc get pods</code> command (You may have to run this a few times before you see any output):</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n welcome1 -l deploymentconfig=php1
+oc get pods -n welcome2 -l deploymentconfig=php2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[~] $ oc get pods -n welcome1 -l deploymentconfig=php1
+NAME           READY   STATUS    RESTARTS   AGE
+php1-1-nww4m   1/1     Running   0          4m20s
+[~] $ oc get pods -n welcome2 -l deploymentconfig=php2
+NAME           READY   STATUS    RESTARTS   AGE
+php2-1-ljw9w   1/1     Running   0          4m20s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can check the quota by first becoming <code>kubeadmin</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now run <code>oc describe clusterresourcequotas for-user-normaluser1</code> to see the status of the quota:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe clusterresourcequotas for-user-normaluser1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name:		for-user-normaluser1
+Created:	22 minutes ago
+Labels:		&lt;none&gt;
+Annotations:	&lt;none&gt;
+Namespace Selector: ["welcome1" "welcome2"]
+Label Selector:
+AnnotationSelector: map[openshift.io/requester:normaluser1]
+Resource	Used	Hard
+--------	----	----
+pods		2	10</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You see that not only that 2 out of 10 pods are being used, but that the namespaces the quota is being applied to. Check the namespace manifest for <code>welcome1</code> to see the annotation the quota is looking for:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get ns welcome1 -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should look something like this. Take special note of the annotations:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: ""
+    openshift.io/requester: normaluser1
+    openshift.io/sa.scc.mcs: s0:c26,c20
+    openshift.io/sa.scc.supplemental-groups: 1000690000/10000
+    openshift.io/sa.scc.uid-range: 1000690000/10000
+  creationTimestamp: "2019-11-22T01:40:10Z"
+  name: welcome1
+  resourceVersion: "76604"
+  selfLink: /api/v1/namespaces/welcome1
+  uid: 058b7e91-0cc9-11ea-8361-0a190b75e8c6
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now as <code>normaluser1</code>, try to scale your apps beyond 10 pods:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft
+oc scale dc/php1 -n welcome1 --replicas=5
+oc scale dc/php2 -n welcome2 --replicas=6</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take a note of how many pods are running:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods --no-headers -n welcome1 -l deploymentconfig=php1 | wc -l
+oc get pods --no-headers -n welcome2 -l deploymentconfig=php2 | wc -l</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Both of these commands should return no more than 10 added up together. Check the events to see the quota in action!</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get events -n welcome1 | grep "Error creating" | head -1
+oc get events -n welcome2 | grep "Error creating" | head -1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see a message like the following.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>3m31s       Warning   FailedCreate                  replicationcontroller/php2-1   Error creating: pods "php2-1-wn22s" is forbidden: exceeded quota: for-user-normaluser1, requested: pods=1, used: pods=10, limited: pods=10</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To see the status, switch to the <code>kubeadmin</code> account and run the <code>describe</code> command from before:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}
+oc describe clusterresourcequotas for-user-normaluser1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see that the hard pod limit has been reached</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name:		for-user-normaluser1
+Created:	45 minutes ago
+Labels:		&lt;none&gt;
+Annotations:	&lt;none&gt;
+Namespace Selector: ["welcome1" "welcome2"]
+Label Selector:
+AnnotationSelector: map[openshift.io/requester:normaluser1]
+Resource	Used	Hard
+--------	----	----
+pods		10	10</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_setting_quota_by_label"><a class="anchor" href="#_setting_quota_by_label"></a>Setting quota by label</h4>
+<div class="paragraph">
+<p>In order to set a quota by application stacks that may span multiple projects, you&#8217;ll have to use labels to identify the project. First, make sure you&#8217;re <code>kubeadmin</code></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now set a quota based on a label. For this lab we will use <code>appstack=pricelist</code> key/value based label to identify projects.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create clusterresourcequota for-pricelist \
+    --project-label-selector=appstack=pricelist \
+    --hard=pods=5</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now create two projects:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm new-project pricelist-frontend
+oc adm new-project pricelist-backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Assign the <code>edit</code> role to the user <code>normaluser1</code> for these two projects:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc adm policy add-role-to-user edit normaluser1 -n pricelist-frontend
+oc adm policy add-role-to-user edit normaluser1 -n pricelist-backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To identify these two projects to belonging to the <code>pricelist</code> application stack, you will need to label the corresponding namespace:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label ns pricelist-frontend appstack=pricelist
+oc label ns pricelist-backend appstack=pricelist</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run the <code>oc describe</code> command for the <code>for-pricelist</code> cluster resource quota:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe clusterresourcequotas for-pricelist</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see that both of the projects are now being tracked:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name:		for-pricelist
+Created:	6 minutes ago
+Labels:		&lt;none&gt;
+Annotations:	&lt;none&gt;
+Namespace Selector: ["pricelist-frontend" "pricelist-backend"]
+Label Selector: appstack=pricelist
+AnnotationSelector: map[]
+Resource	Used	Hard
+--------	----	----
+pods		0	5</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Login as <code>normaluser1</code> and create the applications in their respective projects:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft
+oc new-app -n pricelist-frontend --name frontend quay.io/redhatworkshops/pricelist:frontend
+oc new-app -n pricelist-backend --name backend quay.io/redhatworkshops/pricelist:backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check the status of the quota by logging in as <code>kubeadmin</code> and running the <code>describe</code> command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}
+oc describe clusterresourcequotas for-pricelist</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see that 2 out of 5 pods are being used against this quota:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Name:		for-pricelist
+Created:	21 minutes ago
+Labels:		&lt;none&gt;
+Annotations:	&lt;none&gt;
+Namespace Selector: ["pricelist-frontend" "pricelist-backend"]
+Label Selector: appstack=pricelist
+AnnotationSelector: map[]
+Resource	Used	Hard
+--------	----	----
+pods		2	5</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The user <code>normaluser1</code> can create more pods because <code>pricelist-frontend</code> and <code>pricelist-backend</code> were assigned to the user by <code>kubeadmin</code>. They don&#8217;t have the <code>openshift.io/requester=normaluser1</code> annotation since <code>normaluser1</code> didn&#8217;t create them. You can already see how you can mix and match quota polices to fit your envrionment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Test this by logging back in as <code>normaluser1</code> and try to scale the applications beyond 5 pods total.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u normaluser1 -p Op#nSh1ft
+oc scale -n pricelist-frontend dc/frontend --replicas=3
+oc scale -n pricelist-backend dc/backend --replicas=3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Just like before, you should see an error about not being able to scale:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get events -n pricelist-frontend | grep "Error creating" | head -1
+oc get events -n pricelist-backend | grep "Error creating" | head -1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be like the other exercise:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>2m51s       Warning   FailedCreate                  replicationcontroller/backend-1   Error creating: pods "backend-1-r78gk" is forbidden: exceeded quota: for-pricelist, requested: pods=1, used: pods=5, limited: pods=5</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clean_up"><a class="anchor" href="#_clean_up"></a>Clean Up</h4>
+<div class="paragraph">
+<p>Clean up the work you did by first becoming <code>kubeadmin</code>:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>These quotas may interfere with other labs; so delete both of the <code>clusterresourcequota</code> we created in this lab:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete clusterresourcequotas for-pricelist for-user-normaluser1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also delete the projects we created for this lab:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete projects pricelist-backend pricelist-frontend welcome1 welcome2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make sure you login as <code>kubeadmin</code> for the next lab.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="#quotas.adoc">Quotas</a></span>
+  <span class="next"><a href="template-quota-limits.html">Project Request Template</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

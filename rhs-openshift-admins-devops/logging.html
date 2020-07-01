@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/logging.html">
+    <link rel="prev" href="ldap-groupsync.html">
+    <link rel="next" href="monitoring-basics.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="logging.html">Logging</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/logging.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_openshift_log_aggregation"><a class="anchor" href="#_openshift_log_aggregation"></a>OpenShift Log Aggregation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab you will explore the logging aggregation capabilities of
+OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>An extremely important function of OpenShift is collecting and aggregating
+logs from the environments and the application pods it is running. OpenShift
+ships with an elastic log aggregation solution: <strong>EFK</strong>. (<strong>E</strong>lasticSearch,
+<strong>F</strong>luentd and <strong>K</strong>ibana)</p>
+</div>
+<div class="paragraph">
+<p>The cluster logging components are based upon Elasticsearch, Fluentd, and
+Kibana (EFK). The collector, Fluentd, is deployed to each node in the
+OpenShift cluster. It collects all node and container logs and writes them to
+Elasticsearch (ES). Kibana is the centralized, web UI where users and
+administrators can create rich visualizations and dashboards with the
+aggregated data. Administrators can see and search through all logs.
+Application owners and developers can allow access to logs that belong to
+their projects. The EFK stack runs on top of OpenShift.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This lab requires that you have completed the infra-nodes lab. The logging
+stack will be installed on the <code>infra</code> nodes that were created in that lab.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>More information may be found on the official OpenShift documentation site
+found here:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>https://docs.openshift.com/container-platform/4.1/logging/efk-logging.html</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This exercise is done almost entirely using the OpenShift web console. All of
+the interactions with the web console are effectively creating or
+manipulating API objects in the background. It is possible to fully automate
+the process and/or do it using the CLI or other tools, but these methods are
+not covered in the exercise or documentation at this time.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_deploying_openshift_logging"><a class="anchor" href="#_deploying_openshift_logging"></a>Deploying OpenShift Logging</h3>
+<div class="paragraph">
+<p>OpenShift Container Platform cluster logging is designed to be used with the
+default configuration, which is tuned for small to medium sized OpenShift
+Container Platform clusters. The installation instructions that follow
+include a sample Cluster Logging Custom Resource (CR), which you can use to
+create a cluster logging instance and configure your cluster logging
+deployment.</p>
+</div>
+<div class="paragraph">
+<p>If you want to use the default cluster logging install, you can use the
+sample CR directly.</p>
+</div>
+<div class="paragraph">
+<p>If you want to customize your deployment, make changes to the sample CR as
+needed. The following describes the configurations you can make when
+installing your cluster logging instance or modify after installtion. See the
+Configuring sections for more information on working with each component,
+including modifications you can make outside of the Cluster Logging Custom
+Resource.</p>
+</div>
+<div class="sect3">
+<h4 id="_create_the_openshift_logging_namespace"><a class="anchor" href="#_create_the_openshift_logging_namespace"></a>Create the <code>openshift-logging</code> namespace</h4>
+<div class="paragraph">
+<p>OpenShift Logging will be run from within its own namespace
+<code>openshift-logging</code>. This namespace does not exist by default, and needs to
+be created before logging may be installed. The namespace is represented in
+yaml format as:</p>
+</div>
+<div class="listingblock">
+<div class="title">openshift_logging_namespace.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-logging
+  annotations:
+    openshift.io/node-selector: ""
+  labels:
+    openshift.io/cluster-logging: "true"
+    openshift.io/cluster-monitoring: "true"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To create the namespace, run the following command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f {{ HOME_PATH }}/support/openshift_logging_namespace.yaml</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_install_the_elasticsearch_and_cluster_logging_operators_in_the_cluster"><a class="anchor" href="#_install_the_elasticsearch_and_cluster_logging_operators_in_the_cluster"></a>Install the <code>Elasticsearch</code> and  <code>Cluster Logging</code> Operators in the cluster</h4>
+<div class="paragraph">
+<p>In order to install and configure the <code>EFK</code> stack into the cluster,
+additional operators need to be installed. These can be installed from the
+<code>Operator Hub</code> from within the cluster via the GUI.</p>
+</div>
+<div class="paragraph">
+<p>When using operators in OpenShift, it is important to understand the basics
+of some of the underlying principles that make up the Operators.
+<code>CustomResourceDefinion (CRD)</code> and <code>CustomResource (CR)</code> are two Kubernetes
+objects that we will briefly describe.<code>CRDs</code> are generic pre-defined
+structures of data. The operator understands how to apply the data that is
+defined by the <code>CRD</code>. In terms of programming, <code>CRDs</code> can be thought as being
+similar to a class. <code>CustomResource (CR)</code> is an actual implementations of the
+<code>CRD</code>, where the structured data has actual values. These values are what the
+operator will use when configuring it&#8217;s service. Again, in programming terms,
+<code>CRs</code> would be similar to an instantiated object of the class.</p>
+</div>
+<div class="paragraph">
+<p>The general pattern for using Operators is first, install the Operator, which
+will create the necessary <code>CRDs</code>. After the <code>CRDs</code> have been created, we can
+create the <code>CR</code> which will tell the operator how to act, what to install,
+and/or what to configure. For installing <code>openshift-logging</code>, we will follow
+this pattern.</p>
+</div>
+<div class="paragraph">
+<p>To begin, log-in to the OpenShift Cluster&#8217;s GUI.
+<code>{{ MASTER_URL }}</code></p>
+</div>
+<div class="paragraph">
+<p>Then follow the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the Elasticsearch Operator:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the OpenShift console, click <code>Operators</code> → <code>OperatorHub</code>.</p>
+</li>
+<li>
+<p>Choose <code>Elasticsearch Operator</code> from the list of available Operators,
+and click <code>Install</code>.</p>
+</li>
+<li>
+<p>On the <code>Create Operator Subscription</code> page, <strong>select Update Channel 4.2</strong>, leave all other defaults
+and then click <code>Subscribe</code>.</p>
+<div class="paragraph">
+<p>This makes the Operator available to all users and projects that use this
+OpenShift Container Platform cluster.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Install the Cluster Logging Operator:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>Cluster Logging</code> operator needs to be installed in the
+<code>openshift-logging</code> namespace. Please ensure that the <code>openshift-logging</code>
+namespace was created from the previous steps</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>In the OpenShift console, click <code>Operators</code> → <code>OperatorHub</code>.</p>
+</li>
+<li>
+<p>Choose <code>Cluster Logging</code> from the list of available Operators, and click
+<code>Install</code>.</p>
+</li>
+<li>
+<p>On the <code>Create Operator Subscription</code> page, Under ensure <code>Installation
+Mode</code> that <code>A specific namespace on the cluster</code> is selected, and choose
+<code>openshift-logging</code>. In addition, <strong>select Update Channel 4.2</strong> and leave all other defaults
+and then click <code>Subscribe</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Verify the operator installations:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Switch to the <code>Operators</code> → <code>Installed Operators</code> page.</p>
+</li>
+<li>
+<p>Make sure the <code>openshift-logging</code> project is selected.</p>
+</li>
+<li>
+<p>In the <em>Status</em> column you should see green checks with either
+<code>InstallSucceeded</code> or <code>Copied</code> and the text <em>Up to date</em>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>During installation an operator might display a <code>Failed</code> status. If the
+operator then installs with an <code>InstallSucceeded</code> message, you can safely
+ignore the <code>Failed</code> message.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Troubleshooting (optional)</p>
+<div class="paragraph">
+<p>If either operator does not appear as installed, to troubleshoot further:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the Copied tab of the Installed Operators page, if an operator show a
+Status of Copied, this indicates the installation is in process and is
+expected behavior.</p>
+</li>
+<li>
+<p>Switch to the Catalog → Operator Management page and inspect the Operator
+Subscriptions and Install Plans tabs for any failure or errors under Status.</p>
+</li>
+<li>
+<p>Switch to the Workloads → Pods page and check the logs in any Pods in the
+openshift-logging and openshift-operators projects that are reporting issues.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_create_the_loggging_customresource_cr_instance"><a class="anchor" href="#_create_the_loggging_customresource_cr_instance"></a>Create the Loggging <code>CustomResource (CR)</code> instance</h4>
+<div class="paragraph">
+<p>Now that we have the operators installed, along with the <code>CRDs</code>, we can now
+kick off the logging install by creating a Logging <code>CR</code>. This will define how
+we want to install and configure logging.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the OpenShift Console, switch to the the <code>Administration</code> → <code>Custom Resource Definitions</code> page.</p>
+</li>
+<li>
+<p>On the <code>Custom Resource Definitions</code> page, click <code>ClusterLogging</code>.</p>
+</li>
+<li>
+<p>On the <code>Custom Resource Definition Overview</code> page, select <code>View Instances</code> from the <code>Actions</code> menu.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you see a <code>404</code> error, don&#8217;t panic. While the operator installation
+succeeded, the operator itself has not finished installing and the
+<code>CustomResourceDefinition</code> may not have been created yet. Wait a few moments
+and then refresh the page.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>On the <code>Cluster Loggings</code> page, click <code>Create Cluster Logging</code>.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This step requires that you have completed the <code>Deploying and Managing OpenShift Container Storage</code> Module. If you have not completed the <code>OCS</code> module, you will need to substitute <code>storageClassName: ocs-storagecluster-ceph-rbd</code> with <code>storageClassName: gp2</code> in the <code>YAML</code> below before copying to the editor.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>In the <code>YAML</code> editor, replace the code with the following:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">openshift_logging_cr.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  name: "instance"
+  namespace: "openshift-logging"
+spec:
+  managementState: "Managed"
+  logStore:
+    type: "elasticsearch"
+    elasticsearch:
+      nodeCount: 3
+      storage:
+         storageClassName: ocs-storagecluster-ceph-rbd
+         size: 100Gi
+      redundancyPolicy: "SingleRedundancy"
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      resources:
+        request:
+          memory: 4G
+  visualization:
+    type: "kibana"
+    kibana:
+      replicas: 1
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+  curation:
+    type: "curator"
+    curator:
+      schedule: "30 3 * * *"
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+  collection:
+    logs:
+      type: "fluentd"
+      fluentd: {}
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then click <code>Create</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verify_the_loggging_install"><a class="anchor" href="#_verify_the_loggging_install"></a>Verify the Loggging install</h4>
+<div class="paragraph">
+<p>Now that Logging has been created, let&#8217;s verify that things are working.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch to the <code>Workloads</code> → <code>Pods</code> page.</p>
+</li>
+<li>
+<p>Select the <code>openshift-logging</code> project.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You should see pods for cluster logging (the operator itself), Elasticsearch,
+and Fluentd, and Kibana.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can verify from the command line by using the following command:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -n openshift-logging</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should eventually see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                            READY   STATUS    RESTARTS   AGE
+cluster-logging-operator-cb795f8dc-xkckc        1/1     Running   0          32m
+elasticsearch-cdm-b3nqzchd-1-5c6797-67kfz       2/2     Running   0          14m
+elasticsearch-cdm-b3nqzchd-2-6657f4-wtprv       2/2     Running   0          14m
+elasticsearch-cdm-b3nqzchd-3-588c65-clg7g       2/2     Running   0          14m
+fluentd-2c7dg                                   1/1     Running   0          14m
+fluentd-9z7kk                                   1/1     Running   0          14m
+fluentd-br7r2                                   1/1     Running   0          14m
+fluentd-fn2sb                                   1/1     Running   0          14m
+fluentd-pb2f8                                   1/1     Running   0          14m
+fluentd-zqgqx                                   1/1     Running   0          14m
+kibana-7fb4fd4cc9-bvt4p                         2/2     Running   0          14m</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <em>Fluentd</em> <strong>Pods</strong> are deployed as part of a <strong>DaemonSet</strong>, which is a mechanism
+to ensure that specific <strong>Pods</strong> run on specific <strong>Nodes</strong> in the cluster at all
+times:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get daemonset -n openshift-logging</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+fluentd   9         9         9       9            9           kubernetes.io/os=linux   94s</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should expect 1 <code>fluentd</code> <strong>Pod</strong> for every <strong>Node</strong> in your cluster.
+Remember that <strong>Masters</strong> are still <strong>Nodes</strong> and <code>fluentd</code> will run there, too,
+to slurp the various logs.</p>
+</div>
+<div class="paragraph">
+<p>You will also see the storage for ElasticSearch has been automatically
+provisioned. If you query the <strong>PersistentVolumeClaim</strong> objects in this project you will see the new storage.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pvc -n openshift-logging</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS
+MODES   STORAGECLASS                  AGE
+elasticsearch-elasticsearch-cdm-ggzilasv-1   Bound    pvc-f3239564-389c-11ea-bab2-06ca7918708a   100Gi      RWO
+        ocs-storagecluster-ceph-rbd   15m
+elasticsearch-elasticsearch-cdm-ggzilasv-2   Bound    pvc-f324a252-389c-11ea-bab2-06ca7918708a   100Gi      RWO
+        ocs-storagecluster-ceph-rbd   15m
+elasticsearch-elasticsearch-cdm-ggzilasv-3   Bound    pvc-f326aa7d-389c-11ea-bab2-06ca7918708a   100Gi      RWO
+        ocs-storagecluster-ceph-rbd   15m</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Much like with the Metrics solution, we defined the appropriate
+<code>NodeSelector</code> in the Logging configuration (<code>CR</code>) to ensure that the Logging
+components only landed on the infra nodes. That being said, the <code>DaemonSet</code>
+ensures FluentD runs on <strong>all</strong> nodes. Otherwise we would not capture all of
+the container logs.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_accessing_kibana"><a class="anchor" href="#_accessing_kibana"></a>Accessing <em>Kibana</em></h4>
+<div class="paragraph">
+<p>As mentioned before, <em>Kibana</em> is the front end and the way that users and
+admins may access the OpenShift Logging stack. To reach the <em>Kibana</em> user
+interface, first determine its public access URL by querying the <strong>Route</strong> that
+got set up to expose Kibana&#8217;s <strong>Service</strong>:</p>
+</div>
+<div class="paragraph">
+<p>To find and access the <em>Kibana</em> route:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the OpenShift console, click on the <code>Networking</code> → <code>Routes</code> page.</p>
+</li>
+<li>
+<p>Select the <code>openshift-logging</code> project.</p>
+</li>
+<li>
+<p>Click on the <code>Kibana</code> route.</p>
+</li>
+<li>
+<p>In the <code>Location</code> field, click on the URL presented.</p>
+</li>
+<li>
+<p>Click through and accept the SSL certificates</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Alternatively, this can be obtained from the command line:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route -n openshift-logging</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME     HOST/PORT                                                           PATH   SERVICES   PORT    TERMINATION          WILDCARD
+kibana   kibana-openshift-logging.{{ ROUTE_SUBDOMAIN }}          kibana     &lt;all&gt;   reencrypt/Redirect   None</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or, you can control+click the link:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://kibana-openshift-logging.{{" class="bare">https://kibana-openshift-logging.{{</a> ROUTE_SUBDOMAIN }}</p>
+</div>
+<div class="paragraph">
+<p>There is a special authentication proxy that is configured as part of the EFK
+installation that results in Kibana requiring OpenShift credentials for
+access.</p>
+</div>
+<div class="paragraph">
+<p>Because you&#8217;ve already authenticated to the OpenShift Console as a
+cluster-admin user, you will see an administrative view of what Kibana has to
+show you (which you authorized by clicking the button).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_queries_with_kibana"><a class="anchor" href="#_queries_with_kibana"></a>Queries with <em>Kibana</em></h4>
+<div class="paragraph">
+<p>Once the <em>Kibana</em> web interface is up, we are now able to do queries.
+<em>Kibana</em> offers a the user a powerful interface to query all logs that come
+from the cluster.</p>
+</div>
+<div class="paragraph">
+<p>By default, <em>Kibana</em> will show all logs that have been received within the
+the last 15 minutes. This time interval may be changed in the upper right
+hand corner. The log messages are shown in the middle of the page. All log
+messages that are received are indexed based on the log message content. Each
+message will have fields associated that are associated to that log message.
+To see the fields that make up an individual message, click on the arrow on
+the side of each message located in the center of the page. This will show
+the message fields that are contained.</p>
+</div>
+<div class="paragraph">
+<p>First, set the default index pattern to <code>.all</code>. On the left hand side towards
+the top, in the drop down menu select the <code>.all</code> index pattern.</p>
+</div>
+<div class="paragraph">
+<p>To select fields to show for messages, look on left hand side fore the
+<code>Available Fields</code> label. Below this are fields that can be selected and
+shown in the middle of the screen. Find the <code>hostname</code> field below the
+<code>Available Fields</code> and click <code>add</code>. Notice now, in the message pain, each
+message&#8217;s hostname is displayed. More fields may be added. Click the <code>add</code>
+button for <code>kubernetes.pod_name</code> and also for <code>message</code>.</p>
+</div>
+<div class="paragraph">
+<p>To create a query for logs, the <code>Add a filter +</code> link right below the search
+box may be used. This will allow us to build queries using the fields of the
+messages. For example, if we wanted to see all log messages from the
+<code>openshift-logging</code> namespace, we can do the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click on <code>Add a filter +</code>.</p>
+</li>
+<li>
+<p>In the <code>Fields</code> input box, start typing <code>kubernetes.namespace_name</code>.
+Notice all of the available fields that we can use to build the query</p>
+</li>
+<li>
+<p>Next, select <code>is</code>.</p>
+</li>
+<li>
+<p>In the <code>Value</code> field, type in <code>openshift-logging</code></p>
+</li>
+<li>
+<p>Click the "Save" button</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now, in the center of the screen you will see all of the logs from all the
+pods in the <code>openshift-logging</code> namespace.</p>
+</div>
+<div class="paragraph">
+<p>Of course, you may add more filters to refine the query.</p>
+</div>
+<div class="paragraph">
+<p>One other neat option that Kibana allows you to do is save queries to use for
+later. To save a query do the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>click on <code>Save</code> at the top of the screen.</p>
+</li>
+<li>
+<p>Type in the name you would like to save it as. In this case, let&#8217;s type in
+<code>openshift-logging Namespace</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once this has been saved, it can be used at a later time by hitting the
+<code>Open</code> button and selecting this query.</p>
+</div>
+<div class="paragraph">
+<p>Please take time to explore the <em>Kibana</em> page and get experience by adding
+and doing more queries. This will be helpful when using a production cluster,
+you will be able to get the exact logs that you are looking for in a single
+place.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="ldap-groupsync.html">LDAP Group Sync</a></span>
+  <span class="next"><a href="monitoring-basics.html">Monitoring</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

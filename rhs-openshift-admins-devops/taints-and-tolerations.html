@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Template Tutorial</title>
+    <link rel="canonical" href="https://redhat-developer-demos.github.io/template-tutorial/rhs-openshift-admins-devops/taints-and-tolerations.html">
+    <link rel="prev" href="networking.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="https://redhat-developer-demos.github.io/template-tutorial">Template Tutorial</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="logging.html">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="machinesets.html">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="networking.html">Networking</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#cluster-management.adoc">Cluster Management</a></li>
+    <li><a href="taints-and-tolerations.html">Taints and Toleration</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/taints-and-tolerations.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_taints_and_tolerations"><a class="anchor" href="#_taints_and_tolerations"></a>Taints and Tolerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a previous lab, you created "infra" nodes leveraging <a href="https://docs.openshift.com/container-platform/4.3/nodes/scheduling/nodes-scheduler-node-selectors.html">nodeSelector</a>
+to control where the workload lands. You saw how you can set nodes to perform
+certain tasks. The <code>nodeSelector</code> in  the <code>nodePlacement</code> attracts pods to a
+set of nodes. But what if you want the opposite? What if you want to repel
+pods?</p>
+</div>
+<div class="paragraph">
+<p>Having a taint in place will make sure a pod does NOT run on the tainted node.</p>
+</div>
+<div class="paragraph">
+<p>Some usecases include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A node (or a group of nodes) in the cluster is reserved for special purposes</p>
+</li>
+<li>
+<p>Nodes having specialized hardware for specific tasks (like a GPU)</p>
+</li>
+<li>
+<p>Some nodes may be licensed for some software running on it</p>
+</li>
+<li>
+<p>Nodes can be in different network zone for compliance reasons</p>
+</li>
+<li>
+<p>You may want to troubleshoot a misbehaving node</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In this lab we&#8217;ll explore how to use taints and tolerations to control where
+workloads land.</p>
+</div>
+<div class="sect2">
+<h3 id="_background"><a class="anchor" href="#_background"></a>Background</h3>
+<div class="paragraph">
+<p>Taints and tolerations work in tandem to ensure that workloads are not
+scheduled onto certian nodes. Once a node is tainted, that node should not
+accept any workload that does not tolerate the taint(s). Tolerations that are
+applied to these workloads will allow (but do not require) the corresponding
+pods to schedule onto nodes with matching taints.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will have to use <code>nodeSelector</code> along with taints and tolerations to have
+workloads ALWAYS land on a specific node.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_examine_node_labels"><a class="anchor" href="#_examine_node_labels"></a>Examine node labels</h4>
+<div class="paragraph">
+<p>In order to examine the nodes, make sure you&#8217;re running as <code>kubeadmin</code></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List the current worker nodes, ignoring infra nodes and storage nodes.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Depending on which labs you&#8217;ve done, you may have 3 more more nodes with the
+worker label set.</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s look to see if there are any taints added to these workers.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage' | grep Taint</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There shouldn&#8217;t be any taints assinged to these workers.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deploying_test_application"><a class="anchor" href="#_deploying_test_application"></a>Deploying test application</h4>
+<div class="paragraph">
+<p>For this exercise we will be deploying an app to test with.</p>
+</div>
+<div class="paragraph">
+<p>Before you deploy this app, you&#8217;ll need to label your nodes for the duration of
+this exercise. The application deploys on nodes labeled <code>appnode=welcome-php</code>.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage' -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}' | xargs -I{} oc label node {} appnode=welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the nodes were labeled, taking note of the name of the node.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes -l appnode=welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can now deploy the application using the YAML manifest that is provided in
+the home directory.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f ~/support/welcome-php.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This creates the following objects</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The namespace <code>tt-lab</code></p>
+</li>
+<li>
+<p>A deployment called <code>welcome-php</code> that&#8217;s running a sample php app</p>
+</li>
+<li>
+<p>A service called <code>welcome-php</code> that listens on port <code>8080</code></p>
+</li>
+<li>
+<p>A route called <code>welcome-php</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We will be working on the <code>tt-lab</code> project, so switch to it now.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project tt-lab</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now scale the pods to equal to the number of nodes we have. The default
+scheduler will attempt to evenly distribute the app. Also we&#8217;ll wait for the
+rollout to complete.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NODE_NUMBER=$(oc get nodes --no-headers -l appnode=welcome-php | wc -l)
+oc scale deploy welcome-php --replicas=${NODE_NUMBER}
+oc rollout status deploy welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the application is rolled out, let&#8217;s delete the pods so they can
+re-balance on all nodes.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete pods --all
+oc rollout status deploy welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that the pods are spread evenly accross workers. There should be one pod
+for each node.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">clear
+oc get po -o wide
+oc get nodes -l appnode=welcome-php</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You may have to run <code>oc delete pods --all</code> a few times to get the pods to
+spread evenly.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tainting_nodes"><a class="anchor" href="#_tainting_nodes"></a>Tainting nodes</h4>
+<div class="paragraph">
+<p>We will now taint a node, so it&#8217;ll reject workloads. First, we will go over
+what each taint does. There are 3 basic taints that you can set.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>key=value:NoSchedule</code></p>
+</li>
+<li>
+<p><code>key=value:NoExecute</code></p>
+</li>
+<li>
+<p><code>key=value:PreferNoSchedule</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>key</code> in this case is any string, up to 253 characters. The key must begin
+with a letter or number, and may contain letters, numbers, hyphens, dots, and
+underscores.</p>
+</div>
+<div class="paragraph">
+<p>The <code>value</code> here is any string, up to 63 characters. The value must begin with
+a letter or number, and may contain letters, numbers, hyphens, dots, and
+underscores.</p>
+</div>
+<div class="paragraph">
+<p>The 3 "effects" do the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>NoSchedule</code> - New pods that do not match the taint are not scheduled onto that node. Existing pods on the node remain.</p>
+</li>
+<li>
+<p><code>NoExecute</code> - New pods that do not match the taint cannot be scheduled onto that node. Existing pods on the node that do not have a matching toleration are removed.</p>
+</li>
+<li>
+<p><code>PreferNoSchedule</code> - New pods that do not match the taint might be scheduled onto that node, but the scheduler tries not to. Existing pods on the node remain.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There is another component called the <code>operator</code>. We&#8217;ll go over the <code>operator</code>
+in detail in the "tolerations" section.</p>
+</div>
+<div class="paragraph">
+<p>For this lab we will taint the first node that&#8217;s not an infra or storage node
+with <code>welcome-php=run:NoSchedule</code>.  This makes it to where all new pods
+(without a proper toleration) NOT schedule on this node.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">TTNODE=$(oc get nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage' -o jsonpath='{range .items[0]}{.metadata.name}')
+oc adm taint node ${TTNODE} welcome-php=run:NoSchedule</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examine the nodes we deployed on and see that the taint is applied to one of
+the nodes.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe nodes -l appnode=welcome-php | grep Taint</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We used <code>NoSchedule</code> for the effect, so a pod should still be there. Remember
+that <code>NoSchedule</code> only stops new pods from spawning on the node (the command
+should return a <code>1</code>)</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -o wide | grep -c ${TTNODE}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s delete the pods and wait for the <code>replicaSet</code> to redeploy them.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete pods --all
+oc rollout status deploy welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since our deployment doesn&#8217;t have a toleration, the scheduler will deploy the
+pods on all nodes except the one with a taint. This command should return a <code>0</code></p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -o wide | grep -c ${TTNODE}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Examine where the pods are running.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">clear
+oc get po -o wide
+oc get nodes -l appnode=welcome-php</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tolerations"><a class="anchor" href="#_tolerations"></a>Tolerations</h4>
+<div class="paragraph">
+<p>A <code>toleration</code> is a way for pods to "tolerate" (or "ignore") a node&#8217;s taint
+during scheduling. Tolerations are applied in the <code>podSpec</code>, and is in the
+following form.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">tolerations:
+- key: "welcome-php"
+  operator: "Equal"
+  value: "run"
+  effect: "NoSchedule"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the toleration "matches" then the scheduler will schedule the workload on
+this node (if need be&#8230;&#8203;remember, it&#8217;s not a guarantee). Note that you have to
+match the <code>key</code>, <code>value</code>, and <code>effect</code>. There is also something called an
+<code>operator</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>operator</code> can be set to <code>Equal</code> or <code>Exists</code>, depending on the fuction you
+want.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Equal</code> - The <code>key</code>, <code>value</code>, and <code>effect</code> parameters must match. This is the default setting if nothing is provided.</p>
+</li>
+<li>
+<p><code>Exists</code> - The <code>key</code> and the <code>effect</code> parameters must match. You <strong>must</strong> leave a blank value parameter, which matches any.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll apply this toleration in the <code>spec.template.spec</code> section of the
+deployment.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc patch deployment welcome-php --patch '{"spec":{"template":{"spec":{"tolerations":[{"key":"welcome-php","operator":"Equal","value":"run","effect":"NoSchedule"}]}}}}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Patching triggers another deployment so we&#8217;ll wait for it to finish rolling
+out.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout status deploy welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can see the toleration config by inspecting the deployment YAML</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get deploy welcome-php -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, since we have the toleration in place, we should be running on the node
+with the taint (this should return <code>1</code>)</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods -o wide | grep -c ${TTNODE}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now when you list all pods, they should be now spread evenly.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">clear
+oc get po -o wide
+oc get nodes -l appnode=welcome-php</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To read more about taints and tolerations, you can take a look at the <a href="https://docs.openshift.com/container-platform/4.2/nodes/scheduling/nodes-scheduler-taints-tolerations.html">Official Documentation</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clean_up"><a class="anchor" href="#_clean_up"></a>Clean Up</h4>
+<div class="paragraph">
+<p>Make sure you login as <code>kubeadmin</code> for the next lab.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login -u kubeadmin -p {{ KUBEADMIN_PASSWORD }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other labs may be affected by taints, so let&#8217;s undo what we did:</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete project tt-lab
+oc adm taint node ${TTNODE} welcome-php-
+oc get nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage' -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}' | xargs -I{} oc label node {} appnode-</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make sure the nodes have that taint removed</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe nodes -l 'node-role.kubernetes.io/worker,!node-role.kubernetes.io/infra,!cluster.ocs.openshift.io/openshift-storage' | grep Taint</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also, verify that the label does not exist on the nodes we were working on.
+This command shouldn&#8217;t return any nodes.</p>
+</div>
+<div class="listingblock execute">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get nodes -l appnode=welcome-php</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="networking.html">Networking</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
