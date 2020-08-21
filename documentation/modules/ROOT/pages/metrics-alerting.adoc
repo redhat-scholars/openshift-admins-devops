@@ -23,7 +23,7 @@ End-user application monitoring is not enabled by default in OpenShift. It is a 
 
 1. Visit the OpenShift web console
 2. Log in as a user with cluster-admin privileges
-3. Make sure to select the _Administrator_ view in the upper left
+3. Make sure to select the _Administrator_ perspective in the upper left
 4. Click _Workloads_ and then _Config Maps_
 5. Click _Create Config Map_
 6. Paste the following YAML into the box:
@@ -48,14 +48,14 @@ Once you create the `ConfigMap`, the OpenShift Monitoring operator sees it
 and will spring into action. The operator will create a `Project` to hold the
 user workload monitoring components, and then deploy them.
 
-1. Select the _Developer_ view in the upper left
+1. Select the _Developer_ perspective in the upper left
 2. Click _Topology_
 3. In the _Project_ dropdown, choose `openshift-user-workload-monitoring`
 
 You will see that, in a few moments, a Prometheus operator, a Prometheus
-`StatefulSet`, and a Thanos `StatefulSet` will be deployed. These components
-are what will process the Monitoring and Alerting rules that your end-users
-will create.
+`StatefulSet`, and a link:https://thanos.io/[Thanos] `StatefulSet` will be
+deployed. These components are what will process the Monitoring and Alerting
+rules that your end-users will create.
 
 ### Allow Users to Create Monitors and Alerts
 Even though users can create `Projects` by default, and even though those users inherit the `admin` role for their `Projects`, they don't automatically have RBAC permissions to create Monitors or Alerts. Since you are interacting with your cluster as a user with `cluster-admin`, you wouldn't notice these permissions issues.
@@ -71,8 +71,9 @@ the worst choice and will involve the most effort. Don't do that. It's good
 for testing. It's bad for the real world.
 
 The best and most ideal way is to make it automatic for the end user and to
-not have to intervene all the time. Rule No. 1: Don't make things hard for
-your end users.
+not have to intervene all the time.
+
+Rule No. 1: Don't make things hard for your end users.
 
 When a user creates a `Project`, there is actually a behind-the-scenes
 request process that is taking place. You can learn more about this process
@@ -80,17 +81,18 @@ and how to modify it in link:#[this exercise]. To automate giving users the abil
 to create Monitors and Alerts, you would want to create a `RoleBinding` that
 grants the `monitoring-edit` role as a part of that project request process.
 
-When you have a large number of users and those users may be coordinating in
+When you have a large number of users and those users may be collaborating in
 a single OpenShift `Project`, it can become tricky with respect to managing
 these permissions. Ideally you would do this with group membership that is
 informed by some kind of hierarchy that exists in your identity management
 system. The specific details of implementing such a thing are outside of the
 scope of this exercise.
 
-Back to the task at hand: Since you are currently a user with
-`cluster-admin`, there's nothing for you to do right now for continuing with
-this exercise. Just keep the above in mind when you build out your cluster
-for your users.
+Back to the task at hand: Since you are currently logged in as a user with
+the `cluster-admin` role, you already have the permissions you need to
+manipulate monitors and alerts. Therefore, you don't have to do anything
+extra before continuing with this exercise. Just keep the permissions
+requirements in mind when you build out your cluster for your users.
 
 ### Deploy an Example Application
 Now that your cluster is configured to be able to monitor end-user
@@ -122,7 +124,7 @@ quay.io/brancz/prometheus-example-app:v0.3.0
 The _Name_ value is used as the base unique identifier applied to all of the
 objects that end up deployed. For example, the `Deployment` will be called
 `metrics-app`.
-8. Leave all other values as default and click _Create_.
+8. Leave all other values at their defaults and click _Create_.
 
 ### A Quick Prometheus Overview
 Prometheus is a time-series database (TSDB) that stores key/value metrics and
@@ -222,7 +224,7 @@ this `Service` and scrape their endpoints. It will do this automatically, no
 matter how big or small the `Deployment` is scaled.
 
 1. Copy the above YAML to your clipboard
-2. In the _Developer_ perspective, in your _Metrical_ `Project`, click _+Add+_
+2. In the _Developer_ perspective, in your _metrical_ `Project`, click _+Add+_
 3. Click _YAML_
 4. Paste the `ServiceMonitor` YAML into the box
 5. Click _Create_
@@ -236,8 +238,8 @@ Now that Prometheus is scraping the metrics, you can view the metrics in the
 OpenShift web console.
 
 1. Make sure you are in the _Developer_ perspective
-2. Click _Monitoring_
-3. Click _Metrics_
+2. Click _Monitoring_ in the left navigation
+3. Click the _Metrics_ tab in the center area
 4. Click _Select Query_ and then choose _Custom Query_
 5. Type `http` into the box, and notice that a drop-down of options appears
 +
@@ -249,17 +251,18 @@ Choose `http_requests_total` and hit _Enter_
 You should see a graph of the number of HTTP requests.
 
 Open the application again (you might still have that browser tab handy) and
-change the URL to end with `/err`. This will give you a 404, but that's OK.
-The application is actually responding with that 404, and is recording this
-as a different HTTP request. Refresh the `/err` page a few times. Then go
-back to the graph you were looking at.
+change the URL to end with `/err`. You will notice that the browser reports a
+404 error (not found), but that's OK. The application is actually what is
+responding with that 404, and the application is recording this as a
+different HTTP request. Refresh the `/err` page a few times. Then go back to
+the graph you were looking at.
 
 In a few moments you should see a new colored line appear with the number of
 404 requests that were recorded, and the table at the bottom will also update
 with these details.
 
-Feel free to visit `/` and `/err` and `/metrics` a few more times to see the
-graphs change.
+Feel free to visit `/` and `/err` and `/metrics` endpoints a few more times
+to see the graphs change.
 
 ### Creating a Custom Alert
 Creating custom alerts is just as simple as creating the monitor. Custom
