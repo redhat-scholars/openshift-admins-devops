@@ -4,13 +4,16 @@ Application Performance Monitoring (APM) has been around for a very long
 time. There are myriad tools that all implement it differently, from
 host-level agents to language-specific libraries and more.
 
-OpenShift includes a Prometheus-based monitoring stack out of the box that is
-automatically integrated and configured to monitor the health of the
-OpenShift cluster itself. This system can be easily extended to enable
-end-users to configure their own application monitoring and alerting, too.
+OpenShift includes a
+link:https://docs.openshift.com/container-platform/4.5/monitoring/cluster_monitoring/about-cluster-monitoring.html[Prometheus-based
+monitoring stack] out of the box that is automatically integrated and
+configured to monitor the health of the OpenShift cluster itself. This system
+can be easily extended to
+link:https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html[enable
+end-users to configure their own application monitoring and alerting], too.
 The beauty of enabling the built-in monitoring for end-user applications is
-that the configuration of the monitors and alerts is done via standard
-Kubernetes objects using YAML or JSON files. This means that your
+that standard Kubernetes objects, via YAML/JSON, are used for the
+configuration of the monitors and alerts. This means that your
 development/application teams can treat the monitoring of their applications
 like a part of the application code, and version, develop, and test their
 performance monitoring and alerting as part of the standard SDLC.
@@ -319,7 +322,7 @@ OAuth proxy in front. You are logging in (via the OAuth proxy) and then
 granting permission to use your user credentials (via the proxy).
 Alertmanager itself does not have any authentication, so placing it behind
 the proxy and requiring `cluster-admin` credentials ensures that only the
-right people can see it.
+right people can access it.
 ====
 
 ### Recording Rules
@@ -340,3 +343,6 @@ Rules_ can be expensive in terms of the calculation power they require.
 Complex calculation expressions will consume Prometheus' horsepower, and it
 is possible to cripple the monitoring infrastructure by writing too many
 expensive/complicated recording rule expressions. Keep it simple.
+
+More information on _Recording Rules_ is available in the
+link:https://prometheus.io/docs/practices/rules/[Prometheus documentation.]
