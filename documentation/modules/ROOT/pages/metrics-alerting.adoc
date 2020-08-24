@@ -1,8 +1,11 @@
 ## Custom Application Metrics and Alerting
 
-Application Performance Monitoring (APM) has been around for a very long
-time. There are myriad tools that all implement it differently, from
-host-level agents to language-specific libraries and more.
+link:https://en.wikipedia.org/wiki/Application_performance_management[Application
+Performance Management (APM)] "is the monitoring and management of
+performance and availability of software applications". Software monitoring
+has been around for a very long time, and there are myriad tools that all
+implement it differently, from host-level agents to language-specific
+libraries and more.
 
 OpenShift includes a
 link:https://docs.openshift.com/container-platform/4.5/monitoring/cluster_monitoring/about-cluster-monitoring.html[Prometheus-based
@@ -321,15 +324,18 @@ You should see your alert listed.
 [NOTE]
 ====
 The above process for accessing Alertmanager is because OpenShift places an
-OAuth proxy in front. You are logging in (via the OAuth proxy) and then
-granting permission to use your user credentials (via the proxy).
-Alertmanager itself does not have any authentication, so placing it behind
-the proxy and requiring `cluster-admin` credentials ensures that only the
-right people can access it.
+OAuth proxy in front of Alertmanager. You are logging in (via the OAuth
+proxy) and then granting permission to use your user credentials (via the
+proxy). Alertmanager itself does not have any authentication, so placing it
+behind the proxy and requiring `cluster-admin` credentials ensures that only
+the right people can access it.
 ====
 
 ### Recording Rules
-Earlier we mentioned that it was possible to perform mathematical calculations on recorded metrics. This is done via a _Recording Rule_, which is a component of a `PrometheusRule`. We won't do more than show a potential example of a rule here:
+Earlier we mentioned that it was possible to perform mathematical
+calculations on recorded metrics. This is done via a _Recording Rule_, which
+is a component of a `PrometheusRule`. We won't do more than show a potential
+example of a rule here:
 
 [source,yaml]
 ----
@@ -349,3 +355,11 @@ expensive/complicated recording rule expressions. Keep it simple.
 
 More information on _Recording Rules_ is available in the
 link:https://prometheus.io/docs/practices/rules/[Prometheus documentation.]
+
+### Next Steps
+As administrators of the OpenShift platform, there's not much else for you to
+do besides enabling user-configured monitoring and alerting and configuring
+the default permissions. If you want to familiarize yourself with
+link:https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus'
+query language], it could be helpful to work with your end users to assist
+them in building monitoring and recording rules.
