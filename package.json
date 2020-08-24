@@ -1,0 +1,22 @@
+{
+  "private": "true",
+  "dependencies": {
+    "@antora/cli": "^2.3.3",
+    "@antora/site-generator-default": "^2.3.3",
+    "@types/browser-sync": "^2.26.1",
+    "@types/fs-extra": "^9.0.1",
+    "@types/node": "^14.0.27",
+    "browser-sync": "^2.26.12",
+    "fs-extra": "^8.1.0",
+    "gulp": "^4.0.0",
+    "js-yaml": "^3.14.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7",
+    "yargs": "^15.4.1"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/gulp": "^4.0.6",
+    "@types/yargs": "^15.0.5"
+  }
+}
