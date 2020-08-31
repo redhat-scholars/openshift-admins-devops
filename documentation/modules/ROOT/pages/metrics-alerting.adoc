@@ -1,0 +1,365 @@
+## Custom Application Metrics and Alerting
+
+link:https://en.wikipedia.org/wiki/Application_performance_management[Application
+Performance Management (APM)] "is the monitoring and management of
+performance and availability of software applications". Software monitoring
+has been around for a very long time, and there are myriad tools that all
+implement it differently, from host-level agents to language-specific
+libraries and more.
+
+OpenShift includes a
+link:https://docs.openshift.com/container-platform/4.5/monitoring/cluster_monitoring/about-cluster-monitoring.html[Prometheus-based
+monitoring stack] out of the box that is automatically integrated and
+configured to monitor the health of the OpenShift cluster itself. This system
+can be easily extended to
+link:https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html[enable
+end-users to configure their own application monitoring and alerting], too.
+The beauty of enabling the built-in monitoring for end-user applications is
+that standard Kubernetes objects, via YAML/JSON, are used for the
+configuration of the monitors and alerts. This means that your
+development/application teams can treat the monitoring of their applications
+like a part of the application code, and version, develop, and test their
+performance monitoring and alerting as part of the standard SDLC.
+
+### Enable End-User Application Monitoring
+End-user application monitoring is not enabled by default in OpenShift. It is a simple process to turn it on.
+
+1. Visit the OpenShift web console
+2. Log in as a user with cluster-admin privileges
+3. Make sure to select the _Administrator_ perspective in the upper left
+4. Click _Workloads_ and then _Config Maps_
+5. Click _Create Config Map_
+6. Paste the following YAML into the box:
++
+[.console-input]
+[source,yaml]
+----
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    techPreviewUserWorkload:
+      enabled: true
+----
+
+7. Click _Create_
+
+Once you create the `ConfigMap`, the OpenShift Monitoring operator sees it
+and will spring into action. The operator will create a `Project` to hold the
+user workload monitoring components, and then deploy them.
+
+1. Select the _Developer_ perspective in the upper left
+2. Click _Topology_
+3. In the _Project_ dropdown, choose `openshift-user-workload-monitoring`
+
+You will see that, in a few moments, a Prometheus operator, a Prometheus
+`StatefulSet`, and a link:https://thanos.io/[Thanos] `StatefulSet` will be
+deployed. These components are what will process the Monitoring and Alerting
+rules that your end-users will create.
+
+### Allow Users to Create Monitors and Alerts
+Even though users can create `Projects` by default, and even though those users inherit the `admin` role for their `Projects`, they don't automatically have RBAC permissions to create Monitors or Alerts. Since you are interacting with your cluster as a user with `cluster-admin`, you wouldn't notice these permissions issues.
+
+How can you solve this? 
+
+The documentation shows how to grant the correct permissions using the
+link:https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html#granting-user-permissions-using-web-console_monitoring-your-own-services[web
+console] as well as using the
+link:https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html#granting-user-permissions-using-cli_monitoring-your-own-services[command-line
+interface]. Doing this for each user individually and for all `Projects` is
+the worst choice and will involve the most effort. Don't do that. It's good
+for testing. It's bad for the real world.
+
+The best and most ideal way is to make it automatic for the end user and to
+not have to intervene all the time.
+
+Rule No. 1: Don't make things hard for your end users.
+
+When a user creates a `Project`, there is actually a behind-the-scenes
+request process that is taking place. You can learn more about this process
+and how to modify it in link:#[this exercise]. To automate giving users the ability
+to create Monitors and Alerts, you would want to create a `RoleBinding` that
+grants the `monitoring-edit` role as a part of that project request process.
+
+When you have a large number of users and those users may be collaborating in
+a single OpenShift `Project`, it can become tricky with respect to managing
+these permissions. Ideally you would do this with group membership that is
+informed by some kind of hierarchy that exists in your identity management
+system. The specific details of implementing such a thing are outside of the
+scope of this exercise.
+
+Back to the task at hand: Since you are currently logged in as a user with
+the `cluster-admin` role, you already have the permissions you need to
+manipulate monitors and alerts. Therefore, you don't have to do anything
+extra before continuing with this exercise. Just keep the permissions
+requirements in mind when you build out your cluster for your users.
+
+### Deploy an Example Application
+Now that your cluster is configured to be able to monitor end-user
+applications, and your users have permissions to create Monitors and Alerts,
+you can try monitoring an application to see what it looks like.
+
+1. In the web console, choose the _Developer_ perspective at the top left.
+2. Click the _Project_ dropdown and then _Create Project_
+3. Call your project _metrical_. You can give it a display name or a
+description if you wish.
+4. Click _Create_
++
+At this point, you can now deploy the sample application. The view you're
+immediately presented after creating your `Project` is the deployment
+workflow.
++
+If for some reason you have navigated away, click _+Add_ on the left first.
+5. Click _Container Image_
+6. Where it says _Enter an image name_, paste the following:
++
+[.console-input]
+[source,text]
+----
+quay.io/brancz/prometheus-example-app:v0.3.0
+----
+7. You can use anything in the box that says _Application Name_, but you
+*must* put `metrics-app` in the box that says _Name_.
++
+The _Name_ value is used as the base unique identifier applied to all of the
+objects that end up deployed. For example, the `Deployment` will be called
+`metrics-app`.
+8. Leave all other values at their defaults and click _Create_.
+
+### A Quick Prometheus Overview
+Prometheus is a time-series database (TSDB) that stores key/value metrics and
+provides access to them via a structured query language, PromQL. It also has
+a framework that includes plug-ins which can talk to services to send alerts
+(eg: Pagerduty, Slack, etc). Applications are expected to expose a `/metrics`
+endpoint and provide data in a specific syntax, and Prometheus will scrape
+this data and store it in the TSDB.
+
+Application owners/developers are responsible for making sure that their
+applications implement this `/metrics` endpoint, and the application that you
+deployed in the previous example does just that.
+
+In the _Developer_ perspective, in the _metrical_ `Project`, in the
+_Topology_ view, you can click the little pop-out arrow to visit the
+application. It was exposed via a `Route` when you deployed the container
+image. This simple application will just provide a greeting.
+
+Once you have a browser tab with the application open, add `/metrics` to the
+end of the URL and hit Enter. You will then see the Prometheus metrics data
+and it likely looks something like the following:
+
+[source,text]
+----
+# HELP http_request_duration_seconds Duration of all HTTP requests
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 2
+http_request_duration_seconds_sum{code="200",handler="found",method="get"} 4.9956999999999996e-05
+http_request_duration_seconds_count{code="200",handler="found",method="get"} 2
+# HELP http_requests_total Count of all HTTP requests
+# TYPE http_requests_total counter
+http_requests_total{code="200",method="get"} 2
+# HELP version Version information about this binary
+# TYPE version gauge
+version{version="v0.3.0"} 1
+----
+
+It is up to your application developers to ensure that the metrics they want
+to record are presented here. Many languages already have Prometheus
+libraries available to make it convenient to expose metrics. It is also
+possible to derive metrics, mathematically, from already recorded metrics.
+We'll describe the details on that in a moment.
+
+[NOTE]
+====
+When you visit `/` or `/metrics` with a browser, your browser also makes a
+request for a favicon, which the app interprets as a normal HTTP GET request,
+and this increments the HTTP request counter. If you use curl to visit the
+app's endpoints, you would not see this "extra" increment. Visits to
+`/metrics` don't normally increment the counters, but the request for the
+favicon _does. You'll also notice that visiting `/` with your browser
+increments the count by two - one for the request to the page and another
+"hidden" request for the favicon.
+====
+
+Prometheus scrapes these special key/value data points and stores them in its
+database. First, though, you have to tell Prometheus to actually look for
+your applications.
+
+### Creating a Service Monitor
+Prometheus doesn't automatically find application metrics endpoints. It needs to be told where to look. This is done using an instance of a `ServiceMonitor`.
+
+The following `ServiceMonitor` definition tells Prometheus to scrape the metrics from the application you just deployed:
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: example-monitor
+spec:
+  endpoints:
+  - interval: 30s
+    port: 8080-tcp
+    scheme: http
+  selector:
+    matchLabels:
+      app: metrics-app
+----
+
+You'll notice that the `ServiceMonitor` is looking at endpoints of a
+Kubernetes `Service`, and, in this case, specifically at the port named
+`8080-tcp`. Prometheus will know to find all of the `Pods` that are a part of
+this `Service` and scrape their endpoints. It will do this automatically, no
+matter how big or small the `Deployment` is scaled.
+
+1. Copy the above YAML to your clipboard
+2. In the _Developer_ perspective, in your _metrical_ `Project`, click _+Add+_
+3. Click _YAML_
+4. Paste the `ServiceMonitor` YAML into the box
+5. Click _Create_
+
+The Prometheus for user workload monitoring will shortly detect this
+`ServiceMonitor` and begin scraping the `/metrics` endpoint of the deployed
+application.
+
+### Viewing Application Metrics
+Now that Prometheus is scraping the metrics, you can view the metrics in the
+OpenShift web console.
+
+1. Make sure you are in the _Developer_ perspective
+2. Click _Monitoring_ in the left navigation
+3. Click the _Metrics_ tab in the center area
+4. Click _Select Query_ and then choose _Custom Query_
+5. Type `http` into the box, and notice that a drop-down of options appears
++
+If you recall the Prometheus metrics data from earlier when you visited the `/metrics` page, you'll see that these are all metrics that were displayed.
++
+Choose `http_requests_total` and hit _Enter_
+6. Set the graph to _15m_(inutes)
+
+You should see a graph of the number of HTTP requests.
+
+Open the application again (you might still have that browser tab handy) and
+change the URL to end with `/err`. You will notice that the browser reports a
+404 error (not found), but that's OK. The application is actually what is
+responding with that 404, and the application is recording this as a
+different HTTP request. Refresh the `/err` page a few times. Then go back to
+the graph you were looking at.
+
+In a few moments you should see a new colored line appear with the number of
+404 requests that were recorded, and the table at the bottom will also update
+with these details.
+
+Feel free to visit `/` and `/err` and `/metrics` endpoints a few more times
+to see the graphs change.
+
+### Creating a Custom Alert
+Creating custom alerts is just as simple as creating the monitor. Custom
+alerts are defined using a `PrometheusRule` object. The following YAML
+defines a `PrometheusRule` that will cause an alert to fire when the number
+of `404` errors in the `http_requests_total` exceeds a quantity of 10:
+
+[.console-input]
+[source,yaml]
+----
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: example-alert
+spec:
+  groups:
+  - name: example
+    rules:
+    - alert: TooManyErrorAlert
+      expr: http_requests_total{code="404"} > 10
+----
+
+1. Make sure you are in the _Developer_ perspective
+2. Click _+Add_
+3. Click _YAML_
+4. Copy and paste the above `PrometheusRule` YAML into the box
+5. Click _Create_
+
+[WARNING]
+====
+With OpenShift 4.5, alerts are not yet exposed in the OpenShift web console,
+even for administrators. Custom monitoring and alerting is a Tech Preview
+feature. In the future, the alerts will move into the web console for both
+admin and non-admin users. The following instructions are temporary until
+OpenShift 4.6 is available.
+====
+
+### Triggering the Alert
+Triggering the alert is simple. Visit the `/err` endpoint of the application
+until you have exceeded more than 10 `404` codes. You can check how many
+`404` you have either by viewing the `/metrics` endpoint, or by using the
+metrics view in the OpenShift web console!
+
+Once you have more than 10 `404` errors:
+
+1. Switch to the _Administrator_ perspective at the upper left
+2. Click _Monitoring_
+3. Click _Alerting_
+4. Click _Alertmanager UI_
+5. Click _Log in with OpenShift_
+6. Provide your cluster admin credentials
+7. Click _Allow selected permissions_
+
+You should see your alert listed.
+
+[NOTE]
+====
+The above process for accessing Alertmanager is because OpenShift places an
+OAuth proxy in front of Alertmanager. You are logging in (via the OAuth
+proxy) and then granting permission to use your user credentials (via the
+proxy). Alertmanager itself does not have any authentication, so placing it
+behind the proxy and requiring `cluster-admin` credentials ensures that only
+the right people can access it.
+====
+
+### Recording Rules
+Earlier we mentioned that it was possible to perform mathematical
+calculations on recorded metrics. This is done via a _Recording Rule_, which
+is a component of a `PrometheusRule`. We won't do more than show a potential
+example of a rule here:
+
+[source,yaml]
+----
+  - name: example
+    rules:
+    - record: job:http_inprogress_requests:sum
+      expr: sum by (job) (http_inprogress_requests)
+----
+
+This would calculate a sum of all `job` values in the `http_inprogress_requests` key. 
+
+It is important for you and your developers to understand that _Recording
+Rules_ can be expensive in terms of the calculation power they require.
+Complex calculation expressions will consume Prometheus' horsepower, and it
+is possible to cripple the monitoring infrastructure by writing too many
+expensive/complicated recording rule expressions. Keep it simple.
+
+More information on _Recording Rules_ is available in the
+link:https://prometheus.io/docs/practices/rules/[Prometheus documentation.]
+
+### Next Steps
+As administrators of the OpenShift platform, there's not much else for you to
+do besides enabling user-configured monitoring and alerting and configuring
+the default permissions. If you want to familiarize yourself with
+link:https://prometheus.io/docs/prometheus/latest/querying/basics/[Prometheus'
+query language], it could be helpful to work with your end users to assist
+them in building monitoring and recording rules.
