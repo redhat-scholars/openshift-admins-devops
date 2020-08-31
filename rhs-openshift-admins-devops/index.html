@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>OpenShift Admins DevOps :: OpenShift Admins DevOps</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/index.html">
-    <link rel="next" href="installation.html#rhs-oad-install-verify">
+    <link rel="next" href="metrics-alerting.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -71,103 +71,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify">Installation and Setup</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-login">Login</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-master">Master Components</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-api">API/Authentication</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-ds">Data Store</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-install">Verifying the Installation</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="installation.html#rhs-oad-install-verify-check-web-console">Check Web Console</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ldap-groupsync.html">LDAP Group Sync</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="logging.html">Logging</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="monitoring-basics.html">Monitoring</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#quotas.adoc">Quotas</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="clusterresourcequota.html">Cluster Resource Quotas</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="template-quota-limits.html">Project Request Template</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="machinesets.html">Machine Sets</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="infra-nodes.html">Infrastructure Nodes</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="app-storage-basics.html">Storage Basics</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="ocs4.html">OpenShift Container Storage</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="cluster-metering.html">Cluster Metering</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="disabling-project-self-provisioning.html">Disable Project Provisioning</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="networking.html">Networking</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="taints-and-tolerations.html">Taints and Toleration</a>
-  </li>
-</ul>
+    <a class="nav-link" href="metrics-alerting.html">Custom App Metrics and Alerting</a>
   </li>
 </ul>
   </li>
@@ -233,7 +137,7 @@ MODULE UNDER DEVELOPMENT
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="installation.html#rhs-oad-install-verify">Installation and Setup</a></span>
+  <span class="next"><a href="metrics-alerting.html">Custom App Metrics and Alerting</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

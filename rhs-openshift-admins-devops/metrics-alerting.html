@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Admins DevOps</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/metrics-alerting.html">
+    <link rel="prev" href="index.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-admins-devops">OpenShift Admins DevOps</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-admins-devops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="metrics-alerting.html">Custom App Metrics and Alerting</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Admins DevOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Admins DevOps</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="metrics-alerting.html">Custom App Metrics and Alerting</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/metrics-alerting.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_custom_application_metrics_and_alerting"><a class="anchor" href="#_custom_application_metrics_and_alerting"></a>Custom Application Metrics and Alerting</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://en.wikipedia.org/wiki/Application_performance_management">Application
+Performance Management (APM)</a> "is the monitoring and management of
+performance and availability of software applications". Software monitoring
+has been around for a very long time, and there are myriad tools that all
+implement it differently, from host-level agents to language-specific
+libraries and more.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift includes a
+<a href="https://docs.openshift.com/container-platform/4.5/monitoring/cluster_monitoring/about-cluster-monitoring.html">Prometheus-based
+monitoring stack</a> out of the box that is automatically integrated and
+configured to monitor the health of the OpenShift cluster itself. This system
+can be easily extended to
+<a href="https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html">enable
+end-users to configure their own application monitoring and alerting</a>, too.
+The beauty of enabling the built-in monitoring for end-user applications is
+that standard Kubernetes objects, via YAML/JSON, are used for the
+configuration of the monitors and alerts. This means that your
+development/application teams can treat the monitoring of their applications
+like a part of the application code, and version, develop, and test their
+performance monitoring and alerting as part of the standard SDLC.</p>
+</div>
+<div class="sect2">
+<h3 id="_enable_end_user_application_monitoring"><a class="anchor" href="#_enable_end_user_application_monitoring"></a>Enable End-User Application Monitoring</h3>
+<div class="paragraph">
+<p>End-user application monitoring is not enabled by default in OpenShift. It is a simple process to turn it on.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Visit the OpenShift web console</p>
+</li>
+<li>
+<p>Log in as a user with cluster-admin privileges</p>
+</li>
+<li>
+<p>Make sure to select the <em>Administrator</em> perspective in the upper left</p>
+</li>
+<li>
+<p>Click <em>Workloads</em> and then <em>Config Maps</em></p>
+</li>
+<li>
+<p>Click <em>Create Config Map</em></p>
+</li>
+<li>
+<p>Paste the following YAML into the box:</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    techPreviewUserWorkload:
+      enabled: true</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Click <em>Create</em></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once you create the <code>ConfigMap</code>, the OpenShift Monitoring operator sees it
+and will spring into action. The operator will create a <code>Project</code> to hold the
+user workload monitoring components, and then deploy them.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the <em>Developer</em> perspective in the upper left</p>
+</li>
+<li>
+<p>Click <em>Topology</em></p>
+</li>
+<li>
+<p>In the <em>Project</em> dropdown, choose <code>openshift-user-workload-monitoring</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You will see that, in a few moments, a Prometheus operator, a Prometheus
+<code>StatefulSet</code>, and a <a href="https://thanos.io/">Thanos</a> <code>StatefulSet</code> will be
+deployed. These components are what will process the Monitoring and Alerting
+rules that your end-users will create.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_allow_users_to_create_monitors_and_alerts"><a class="anchor" href="#_allow_users_to_create_monitors_and_alerts"></a>Allow Users to Create Monitors and Alerts</h3>
+<div class="paragraph">
+<p>Even though users can create <code>Projects</code> by default, and even though those users inherit the <code>admin</code> role for their <code>Projects</code>, they don&#8217;t automatically have RBAC permissions to create Monitors or Alerts. Since you are interacting with your cluster as a user with <code>cluster-admin</code>, you wouldn&#8217;t notice these permissions issues.</p>
+</div>
+<div class="paragraph">
+<p>How can you solve this?</p>
+</div>
+<div class="paragraph">
+<p>The documentation shows how to grant the correct permissions using the
+<a href="https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html#granting-user-permissions-using-web-console_monitoring-your-own-services">web
+console</a> as well as using the
+<a href="https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html#granting-user-permissions-using-cli_monitoring-your-own-services">command-line
+interface</a>. Doing this for each user individually and for all <code>Projects</code> is
+the worst choice and will involve the most effort. Don&#8217;t do that. It&#8217;s good
+for testing. It&#8217;s bad for the real world.</p>
+</div>
+<div class="paragraph">
+<p>The best and most ideal way is to make it automatic for the end user and to
+not have to intervene all the time.</p>
+</div>
+<div class="paragraph">
+<p>Rule No. 1: Don&#8217;t make things hard for your end users.</p>
+</div>
+<div class="paragraph">
+<p>When a user creates a <code>Project</code>, there is actually a behind-the-scenes
+request process that is taking place. You can learn more about this process
+and how to modify it in <a href="#">this exercise</a>. To automate giving users the ability
+to create Monitors and Alerts, you would want to create a <code>RoleBinding</code> that
+grants the <code>monitoring-edit</code> role as a part of that project request process.</p>
+</div>
+<div class="paragraph">
+<p>When you have a large number of users and those users may be collaborating in
+a single OpenShift <code>Project</code>, it can become tricky with respect to managing
+these permissions. Ideally you would do this with group membership that is
+informed by some kind of hierarchy that exists in your identity management
+system. The specific details of implementing such a thing are outside of the
+scope of this exercise.</p>
+</div>
+<div class="paragraph">
+<p>Back to the task at hand: Since you are currently logged in as a user with
+the <code>cluster-admin</code> role, you already have the permissions you need to
+manipulate monitors and alerts. Therefore, you don&#8217;t have to do anything
+extra before continuing with this exercise. Just keep the permissions
+requirements in mind when you build out your cluster for your users.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_an_example_application"><a class="anchor" href="#_deploy_an_example_application"></a>Deploy an Example Application</h3>
+<div class="paragraph">
+<p>Now that your cluster is configured to be able to monitor end-user
+applications, and your users have permissions to create Monitors and Alerts,
+you can try monitoring an application to see what it looks like.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the web console, choose the <em>Developer</em> perspective at the top left.</p>
+</li>
+<li>
+<p>Click the <em>Project</em> dropdown and then <em>Create Project</em></p>
+</li>
+<li>
+<p>Call your project <em>metrical</em>. You can give it a display name or a
+description if you wish.</p>
+</li>
+<li>
+<p>Click <em>Create</em></p>
+<div class="paragraph">
+<p>At this point, you can now deploy the sample application. The view you&#8217;re
+immediately presented after creating your <code>Project</code> is the deployment
+workflow.</p>
+</div>
+<div class="paragraph">
+<p>If for some reason you have navigated away, click <em>+Add</em> on the left first.</p>
+</div>
+</li>
+<li>
+<p>Click <em>Container Image</em></p>
+</li>
+<li>
+<p>Where it says <em>Enter an image name</em>, paste the following:</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">quay.io/brancz/prometheus-example-app:v0.3.0</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can use anything in the box that says <em>Application Name</em>, but you
+<strong>must</strong> put <code>metrics-app</code> in the box that says <em>Name</em>.</p>
+<div class="paragraph">
+<p>The <em>Name</em> value is used as the base unique identifier applied to all of the
+objects that end up deployed. For example, the <code>Deployment</code> will be called
+<code>metrics-app</code>.</p>
+</div>
+</li>
+<li>
+<p>Leave all other values at their defaults and click <em>Create</em>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_quick_prometheus_overview"><a class="anchor" href="#_a_quick_prometheus_overview"></a>A Quick Prometheus Overview</h3>
+<div class="paragraph">
+<p>Prometheus is a time-series database (TSDB) that stores key/value metrics and
+provides access to them via a structured query language, PromQL. It also has
+a framework that includes plug-ins which can talk to services to send alerts
+(eg: Pagerduty, Slack, etc). Applications are expected to expose a <code>/metrics</code>
+endpoint and provide data in a specific syntax, and Prometheus will scrape
+this data and store it in the TSDB.</p>
+</div>
+<div class="paragraph">
+<p>Application owners/developers are responsible for making sure that their
+applications implement this <code>/metrics</code> endpoint, and the application that you
+deployed in the previous example does just that.</p>
+</div>
+<div class="paragraph">
+<p>In the <em>Developer</em> perspective, in the <em>metrical</em> <code>Project</code>, in the
+<em>Topology</em> view, you can click the little pop-out arrow to visit the
+application. It was exposed via a <code>Route</code> when you deployed the container
+image. This simple application will just provide a greeting.</p>
+</div>
+<div class="paragraph">
+<p>Once you have a browser tab with the application open, add <code>/metrics</code> to the
+end of the URL and hit Enter. You will then see the Prometheus metrics data
+and it likely looks something like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text"># HELP http_request_duration_seconds Duration of all HTTP requests
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 2
+http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 2
+http_request_duration_seconds_sum{code="200",handler="found",method="get"} 4.9956999999999996e-05
+http_request_duration_seconds_count{code="200",handler="found",method="get"} 2
+# HELP http_requests_total Count of all HTTP requests
+# TYPE http_requests_total counter
+http_requests_total{code="200",method="get"} 2
+# HELP version Version information about this binary
+# TYPE version gauge
+version{version="v0.3.0"} 1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is up to your application developers to ensure that the metrics they want
+to record are presented here. Many languages already have Prometheus
+libraries available to make it convenient to expose metrics. It is also
+possible to derive metrics, mathematically, from already recorded metrics.
+We&#8217;ll describe the details on that in a moment.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you visit <code>/</code> or <code>/metrics</code> with a browser, your browser also makes a
+request for a favicon, which the app interprets as a normal HTTP GET request,
+and this increments the HTTP request counter. If you use curl to visit the
+app&#8217;s endpoints, you would not see this "extra" increment. Visits to
+<code>/metrics</code> don&#8217;t normally increment the counters, but the request for the
+favicon _does. You&#8217;ll also notice that visiting <code>/</code> with your browser
+increments the count by two - one for the request to the page and another
+"hidden" request for the favicon.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Prometheus scrapes these special key/value data points and stores them in its
+database. First, though, you have to tell Prometheus to actually look for
+your applications.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_service_monitor"><a class="anchor" href="#_creating_a_service_monitor"></a>Creating a Service Monitor</h3>
+<div class="paragraph">
+<p>Prometheus doesn&#8217;t automatically find application metrics endpoints. It needs to be told where to look. This is done using an instance of a <code>ServiceMonitor</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>ServiceMonitor</code> definition tells Prometheus to scrape the metrics from the application you just deployed:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: example-monitor
+spec:
+  endpoints:
+  - interval: 30s
+    port: 8080-tcp
+    scheme: http
+  selector:
+    matchLabels:
+      app: metrics-app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll notice that the <code>ServiceMonitor</code> is looking at endpoints of a
+Kubernetes <code>Service</code>, and, in this case, specifically at the port named
+<code>8080-tcp</code>. Prometheus will know to find all of the <code>Pods</code> that are a part of
+this <code>Service</code> and scrape their endpoints. It will do this automatically, no
+matter how big or small the <code>Deployment</code> is scaled.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Copy the above YAML to your clipboard</p>
+</li>
+<li>
+<p>In the <em>Developer</em> perspective, in your <em>metrical</em> <code>Project</code>, click <em>+Add+</em></p>
+</li>
+<li>
+<p>Click <em>YAML</em></p>
+</li>
+<li>
+<p>Paste the <code>ServiceMonitor</code> YAML into the box</p>
+</li>
+<li>
+<p>Click <em>Create</em></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The Prometheus for user workload monitoring will shortly detect this
+<code>ServiceMonitor</code> and begin scraping the <code>/metrics</code> endpoint of the deployed
+application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_viewing_application_metrics"><a class="anchor" href="#_viewing_application_metrics"></a>Viewing Application Metrics</h3>
+<div class="paragraph">
+<p>Now that Prometheus is scraping the metrics, you can view the metrics in the
+OpenShift web console.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure you are in the <em>Developer</em> perspective</p>
+</li>
+<li>
+<p>Click <em>Monitoring</em> in the left navigation</p>
+</li>
+<li>
+<p>Click the <em>Metrics</em> tab in the center area</p>
+</li>
+<li>
+<p>Click <em>Select Query</em> and then choose <em>Custom Query</em></p>
+</li>
+<li>
+<p>Type <code>http</code> into the box, and notice that a drop-down of options appears</p>
+<div class="paragraph">
+<p>If you recall the Prometheus metrics data from earlier when you visited the <code>/metrics</code> page, you&#8217;ll see that these are all metrics that were displayed.</p>
+</div>
+<div class="paragraph">
+<p>Choose <code>http_requests_total</code> and hit <em>Enter</em></p>
+</div>
+</li>
+<li>
+<p>Set the graph to <em>15m</em>(inutes)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You should see a graph of the number of HTTP requests.</p>
+</div>
+<div class="paragraph">
+<p>Open the application again (you might still have that browser tab handy) and
+change the URL to end with <code>/err</code>. You will notice that the browser reports a
+404 error (not found), but that&#8217;s OK. The application is actually what is
+responding with that 404, and the application is recording this as a
+different HTTP request. Refresh the <code>/err</code> page a few times. Then go back to
+the graph you were looking at.</p>
+</div>
+<div class="paragraph">
+<p>In a few moments you should see a new colored line appear with the number of
+404 requests that were recorded, and the table at the bottom will also update
+with these details.</p>
+</div>
+<div class="paragraph">
+<p>Feel free to visit <code>/</code> and <code>/err</code> and <code>/metrics</code> endpoints a few more times
+to see the graphs change.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_custom_alert"><a class="anchor" href="#_creating_a_custom_alert"></a>Creating a Custom Alert</h3>
+<div class="paragraph">
+<p>Creating custom alerts is just as simple as creating the monitor. Custom
+alerts are defined using a <code>PrometheusRule</code> object. The following YAML
+defines a <code>PrometheusRule</code> that will cause an alert to fire when the number
+of <code>404</code> errors in the <code>http_requests_total</code> exceeds a quantity of 10:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: example-alert
+spec:
+  groups:
+  - name: example
+    rules:
+    - alert: TooManyErrorAlert
+      expr: http_requests_total{code="404"} &gt; 10</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure you are in the <em>Developer</em> perspective</p>
+</li>
+<li>
+<p>Click <em>+Add</em></p>
+</li>
+<li>
+<p>Click <em>YAML</em></p>
+</li>
+<li>
+<p>Copy and paste the above <code>PrometheusRule</code> YAML into the box</p>
+</li>
+<li>
+<p>Click <em>Create</em></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>With OpenShift 4.5, alerts are not yet exposed in the OpenShift web console,
+even for administrators. Custom monitoring and alerting is a Tech Preview
+feature. In the future, the alerts will move into the web console for both
+admin and non-admin users. The following instructions are temporary until
+OpenShift 4.6 is available.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_triggering_the_alert"><a class="anchor" href="#_triggering_the_alert"></a>Triggering the Alert</h3>
+<div class="paragraph">
+<p>Triggering the alert is simple. Visit the <code>/err</code> endpoint of the application
+until you have exceeded more than 10 <code>404</code> codes. You can check how many
+<code>404</code> you have either by viewing the <code>/metrics</code> endpoint, or by using the
+metrics view in the OpenShift web console!</p>
+</div>
+<div class="paragraph">
+<p>Once you have more than 10 <code>404</code> errors:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Switch to the <em>Administrator</em> perspective at the upper left</p>
+</li>
+<li>
+<p>Click <em>Monitoring</em></p>
+</li>
+<li>
+<p>Click <em>Alerting</em></p>
+</li>
+<li>
+<p>Click <em>Alertmanager UI</em></p>
+</li>
+<li>
+<p>Click <em>Log in with OpenShift</em></p>
+</li>
+<li>
+<p>Provide your cluster admin credentials</p>
+</li>
+<li>
+<p>Click <em>Allow selected permissions</em></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You should see your alert listed.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The above process for accessing Alertmanager is because OpenShift places an
+OAuth proxy in front of Alertmanager. You are logging in (via the OAuth
+proxy) and then granting permission to use your user credentials (via the
+proxy). Alertmanager itself does not have any authentication, so placing it
+behind the proxy and requiring <code>cluster-admin</code> credentials ensures that only
+the right people can access it.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recording_rules"><a class="anchor" href="#_recording_rules"></a>Recording Rules</h3>
+<div class="paragraph">
+<p>Earlier we mentioned that it was possible to perform mathematical
+calculations on recorded metrics. This is done via a <em>Recording Rule</em>, which
+is a component of a <code>PrometheusRule</code>. We won&#8217;t do more than show a potential
+example of a rule here:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">  - name: example
+    rules:
+    - record: job:http_inprogress_requests:sum
+      expr: sum by (job) (http_inprogress_requests)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This would calculate a sum of all <code>job</code> values in the <code>http_inprogress_requests</code> key.</p>
+</div>
+<div class="paragraph">
+<p>It is important for you and your developers to understand that <em>Recording
+Rules</em> can be expensive in terms of the calculation power they require.
+Complex calculation expressions will consume Prometheus' horsepower, and it
+is possible to cripple the monitoring infrastructure by writing too many
+expensive/complicated recording rule expressions. Keep it simple.</p>
+</div>
+<div class="paragraph">
+<p>More information on <em>Recording Rules</em> is available in the
+<a href="https://prometheus.io/docs/practices/rules/">Prometheus documentation.</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h3>
+<div class="paragraph">
+<p>As administrators of the OpenShift platform, there&#8217;s not much else for you to
+do besides enabling user-configured monitoring and alerting and configuring
+the default permissions. If you want to familiarize yourself with
+<a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">Prometheus'
+query language</a>, it could be helpful to work with your end users to assist
+them in building monitoring and recording rules.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">OpenShift Admins DevOps</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
