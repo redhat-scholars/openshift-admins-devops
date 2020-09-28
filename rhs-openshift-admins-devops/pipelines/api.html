@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Welcome to OpenShift Admins Devops :: OpenShift Admins DevOps</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/index.html">
-    <link rel="next" href="metrics-alerting.html">
+    <title>OpenShift Pipelines API :: OpenShift Admins DevOps</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/pipelines/api.html">
+    <link rel="prev" href="setup.html">
+    <link rel="next" href="pipelines.html">
     <meta name="generator" content="Antora 2.3.3">
-    <link rel="stylesheet" href="../_/css/site.css">
-<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body class="article">
@@ -16,7 +17,7 @@
   <nav class="navbar">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
-          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
       <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-admins-devops">OpenShift Admins DevOps</a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
@@ -66,12 +67,12 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">OpenShift Admins DevOps</a></h3>
+    <h3 class="title"><a href="../index.html">OpenShift Admins DevOps</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="metrics-alerting.html">Custom App Metrics and Alerting</a>
+    <a class="nav-link" href="../metrics-alerting.html">Custom App Metrics and Alerting</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -178,58 +179,58 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="pipelines/index.html">OpenShift Pipelines</a>
+    <a class="nav-link" href="index.html">OpenShift Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="pipelines/setup.html">Setup</a>
+    <a class="nav-link" href="setup.html">Setup</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="pipelines/api.html">OpenShift Pipelines API</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="api.html">OpenShift Pipelines API</a>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="pipelines/pipelines.html">Pipelines</a>
+    <a class="nav-link" href="pipelines.html">Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#ocp-create-project">Create Project</a>
+    <a class="nav-link" href="pipelines.html#ocp-create-project">Create Project</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#openshift-pipelines-prep-app-deploy">Prepare Application Deployment</a>
+    <a class="nav-link" href="pipelines.html#openshift-pipelines-prep-app-deploy">Prepare Application Deployment</a>
   </li>
   <li class="nav-item" data-depth="4">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="pipelines/pipelines.html#required-tasks">Required Cluster Tasks</a>
+    <a class="nav-link" href="pipelines.html#required-tasks">Required Cluster Tasks</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="5">
-    <a class="nav-link" href="pipelines/pipelines.html#ocp-update-cluster-tasks">Update Cluster Tasks</a>
+    <a class="nav-link" href="pipelines.html#ocp-update-cluster-tasks">Update Cluster Tasks</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#ocp-deploy-app-from-git">Deploy Application from GitHub</a>
+    <a class="nav-link" href="pipelines.html#ocp-deploy-app-from-git">Deploy Application from GitHub</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#ocp-create-java-ksvc-pipeline-tpl">Pipeline Template for Java and Knative Service</a>
+    <a class="nav-link" href="pipelines.html#ocp-create-java-ksvc-pipeline-tpl">Pipeline Template for Java and Knative Service</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#odc-create-ksvc-java-app">Deploy Application with Pipeline</a>
+    <a class="nav-link" href="pipelines.html#odc-create-ksvc-java-app">Deploy Application with Pipeline</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#odc-view-pipelines">View Pipelines</a>
+    <a class="nav-link" href="pipelines.html#odc-view-pipelines">View Pipelines</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#odc-watch-pipelines">Watch Pipelines</a>
+    <a class="nav-link" href="pipelines.html#odc-watch-pipelines">Watch Pipelines</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#odc-view-app">Application Topology</a>
+    <a class="nav-link" href="pipelines.html#odc-view-app">Application Topology</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="pipelines/pipelines.html#odc-pipeline-points">Points to Ponder</a>
+    <a class="nav-link" href="pipelines.html#odc-pipeline-points">Points to Ponder</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="pipelines/triggers.html">Triggers</a>
+    <a class="nav-link" href="triggers.html">Triggers</a>
   </li>
 </ul>
   </li>
@@ -250,7 +251,7 @@
       <span class="title">OpenShift Admins DevOps</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+          <a href="../index.html">master</a>
         </li>
       </ul>
     </li>
@@ -258,7 +259,7 @@
       <span class="title">Tekton Tutorial</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../tekton-tutorial/index.html">master</a>
+          <a href="../../tekton-tutorial/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -270,45 +271,77 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">OpenShift Admins DevOps</a></li>
-    <li><a href="index.html">Welcome to OpenShift Admins Devops</a></li>
+    <li><a href="../index.html">OpenShift Admins DevOps</a></li>
+    <li><a href="#application-developement.adoc">Appplication Development</a></li>
+    <li><a href="index.html">OpenShift Pipelines</a></li>
+    <li><a href="api.html">OpenShift Pipelines API</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-admins-devops/edit/master/documentation/modules/pipelines/pages/api.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Welcome to OpenShift Admins Devops</h1>
-<div class="sect1 text-center strong">
-<h2>OpenShift Admins for DevOps Master Course</h2>
+<h1 class="page">OpenShift Pipelines API</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Operators making your clusters ready for your Developer-users.  To make your Dev-users Awesome (positively impact their <a href="https://www.thoughtworks.com/radar/techniques/four-key-metrics">4 metrics</a>).  Leveraging the current <a href="https://docs.google.com/document/d/1tgBX3jIDvp02qQIdH792qXEkyuevWNFa3ufcM1kKiTo/edit#heading=h.64o33z94fpto">Operators &amp; Admins Master Course</a>.</p>
+<p>The OpenShift Pipelines adds set of Custom Resources Defintion (CRD), that allows to run Pipelines and Triggers.</p>
 </div>
 </div>
 </div>
-<div class="sect1 tiles browse">
-<h2>Browse modules</h2>
+<div class="sect1">
+<h2 id="_pipelines_api"><a class="anchor" href="#_pipelines_api"></a>Pipelines API</h2>
 <div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-MODULE UNDER DEVELOPMENT
-</td>
-</tr>
-</table>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc api-resources --api-group='tekton.dev'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command show an output like:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                SHORTNAMES   APIGROUP     NAMESPACED   KIND
+clustertasks                     tekton.dev   false        ClusterTask
+conditions                       tekton.dev   true         Condition
+pipelineresources                tekton.dev   true         PipelineResource
+pipelineruns        pr,prs       tekton.dev   true         PipelineRun
+pipelines                        tekton.dev   true         Pipeline
+taskruns            tr,trs       tekton.dev   true         TaskRun
+tasks                            tekton.dev   true         Task</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_triggers_api"><a class="anchor" href="#_triggers_api"></a>Triggers API</h2>
+<div class="sectionbody">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc api-resources --api-group='triggers.tekton.dev'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command show an output like:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                     SHORTNAMES   APIGROUP              NAMESPACED   KIND
+clustertriggerbindings   ctb          triggers.tekton.dev   false        ClusterTriggerBinding
+eventlisteners           el           triggers.tekton.dev   true         EventListener
+triggerbindings          tb           triggers.tekton.dev   true         TriggerBinding
+triggertemplates         tt           triggers.tekton.dev   true         TriggerTemplate</code></pre>
+</div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="metrics-alerting.html">Custom App Metrics and Alerting</a></span>
+  <span class="prev"><a href="setup.html">Setup</a></span>
+  <span class="next"><a href="pipelines.html">Pipelines</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -320,8 +353,8 @@ MODULE UNDER DEVELOPMENT
 <footer class="footer">
   <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
 </footer>
-<script src="../_/js/vendor/clipboard.js"></script>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

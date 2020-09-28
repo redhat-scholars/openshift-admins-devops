@@ -6,6 +6,7 @@
     <title>Untitled :: OpenShift Admins DevOps</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/metrics-alerting.html">
     <link rel="prev" href="index.html">
+    <link rel="next" href="#installation.adoc#rhs-oad-install-verify">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -73,6 +74,168 @@
   <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="metrics-alerting.html">Custom App Metrics and Alerting</a>
   </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify">Installation and Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-login">Login</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-master">Master Components</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-api">API/Authentication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-ds">Data Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-health-scaling">Health/Scaling</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-examine">Examining the installation artifacts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-install">Verifying the Installation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-oc-login">Login to OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-cluster-version">Examine the Cluster Version</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-cluster-nodes">Look at the Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#installation.adoc#rhs-oad-install-verify-check-web-console">Check Web Console</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#cluster-management.adoc">Cluster Management</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#auth-and-authnz.adoc">Authentication and Authorization</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#ldap-groupsync.adoc">LDAP Group Sync</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#logging.adoc">Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#monitoring-basics.adoc">Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#quotas.adoc">Quotas</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#clusterresourcequota.adoc">Cluster Resource Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#template-quota-limits.adoc">Project Request Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#machinesets.adoc">Machine Sets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#infra-nodes.adoc">Infrastructure Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#app-storage-basics.adoc">Storage Basics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#ocs4.adoc">OpenShift Container Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#cluster-metering.adoc">Cluster Metering</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#disabling-project-self-provisioning.adoc">Disable Project Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#networking.adoc">Networking</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#taints-and-tolerations.adoc">Taints and Toleration</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#application-developement.adoc">Appplication Development</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="pipelines/index.html">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines/setup.html">Setup</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines/api.html">OpenShift Pipelines API</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="pipelines/pipelines.html">Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#ocp-create-project">Create Project</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#openshift-pipelines-prep-app-deploy">Prepare Application Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="pipelines/pipelines.html#required-tasks">Required Cluster Tasks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="pipelines/pipelines.html#ocp-update-cluster-tasks">Update Cluster Tasks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#ocp-deploy-app-from-git">Deploy Application from GitHub</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#ocp-create-java-ksvc-pipeline-tpl">Pipeline Template for Java and Knative Service</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#odc-create-ksvc-java-app">Deploy Application with Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#odc-view-pipelines">View Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#odc-watch-pipelines">Watch Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#odc-view-app">Application Topology</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="pipelines/pipelines.html#odc-pipeline-points">Points to Ponder</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="pipelines/triggers.html">Triggers</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </li>
 </ul>
@@ -89,6 +252,14 @@
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <span class="title">Tekton Tutorial</span>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../tekton-tutorial/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -670,6 +841,7 @@ them in building monitoring and recording rules.</p>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">OpenShift Admins DevOps</a></span>
+  <span class="next"><a href="#installation.adoc#rhs-oad-install-verify">Installation and Setup</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

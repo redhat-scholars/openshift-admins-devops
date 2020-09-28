@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/index.html</loc>
-<lastmod>2020-08-31T13:50:58.232Z</lastmod>
-</url>
-<url>
-<loc>http://redhat-scholars.github.io/openshift-admins-devops/rhs-openshift-admins-devops/metrics-alerting.html</loc>
-<lastmod>2020-08-31T13:50:58.232Z</lastmod>
-</url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>http://redhat-scholars.github.io/openshift-admins-devops/sitemap-rhs-openshift-admins-devops.xml</loc>
+</sitemap>
+<sitemap>
+<loc>http://redhat-scholars.github.io/openshift-admins-devops/sitemap-tekton-tutorial.xml</loc>
+</sitemap>
+</sitemapindex>
