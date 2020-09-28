@@ -8,24 +8,43 @@ site:
 
 content:
   sources:
-    - url: .
-      branches: HEAD
+    - url: https://github.com/redhat-scholars/tekton-tutorial.git
+      # OpenShift Pipelines TP 1.1
+      tags: v0.14.3
+      # make sure only the tag's content is used
+      branches: []
+      start_path: documentation
+    - url: https://github.com/kameshsampath/openshift-admins-devops.git
+      # PR branch
+      branches: tekton-pipelines
       start_path: documentation
 asciidoc:
   attributes:
-    title: OpenShift Admins DevOps(Dev Mode)
     workshop-domain: rhscholars.devx.red
+    openshift-version: 4.5
     kubernetes-version: v1.18.0
     release-version: master
+    cli: oc
     openshift-console-url: https://console-openshift-console.apps.example.com
     etherpad-url: http://example.com
+    page-pagination: true
+    tekton-version: v0.11.3
+    triggers-version: v0.4.0
+    kn-version: v0.16.0
+    tekton-cli-version: 0.11.0
+    tutorial-namespace: tektontutorial
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js
 ui:
   bundle:
-    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.1/ui-bundle.zip
+    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.5/ui-bundle.zip
     snapshot: true
-  supplemental_files: ./supplemental-ui
+  supplemental_files:
+    - path: ui.yml
+      contents: |
+        static_files: [ .nojekyll ]
+    - path: .nojekyll
 output:
+  clean: true
   dir: ./gh-pages

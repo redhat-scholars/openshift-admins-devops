@@ -12,25 +12,40 @@ content:
       tags: []
       branches: master
       start_path: documentation
+    - url: git@github.com:redhat-scholars/tekton-tutorial.git
+      tags: []
+      branches: master
+      start_path: documentation
 
 asciidoc:
   attributes:
-    title: OpenShift Admins DevOps
+    workshop-domain: rhscholars.devx.red
+    openshift-version: 4.5
+    kubernetes-version: v1.18.0
     release-version: master
+    cli: oc
+    openshift-console-url: https://console-openshift-console.apps.example.com
+    etherpad-url: http://example.com
     page-pagination: true
+    tekton-version: v0.11.3
+    triggers-version: v0.4.0
+    kn-version: v0.16.0
+    tekton-cli-version: 0.11.0
+    tutorial-namespace: tektontutorial
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
 
 ui:
   bundle:
-    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.1/ui-bundle.zip
+    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.5/ui-bundle.zip
     snapshot: true
   supplemental_files:
-    - path: ./supplemental-ui
-    - path: .nojekyll
     - path: ui.yml
-      contents: "static_files: [ .nojekyll ]"
+      contents: |
+        static_files: [ .nojekyll ]
+    - path: .nojekyll
 
 output:
+  clean: true
   dir: ./gh-pages

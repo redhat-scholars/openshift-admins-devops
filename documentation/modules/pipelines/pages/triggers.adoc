@@ -1,0 +1,7 @@
+= OpenShift Pipeline Triggers
+include::master@tekton-tutorial:ROOT:partial$_attributes.adoc[]
+:chapter-namespace: myapp
+
+include::master@tekton-tutorial:openshift:partial$_openshift_triggers.adoc[]
+
+#WIP#
