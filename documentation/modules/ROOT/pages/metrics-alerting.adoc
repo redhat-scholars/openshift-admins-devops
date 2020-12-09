@@ -1,3 +1,4 @@
+// added v4.6blog tag to use as a reference in the Monitoring your own applications in 4.6 blog post
 ## Custom Application Metrics and Alerting
 
 link:https://en.wikipedia.org/wiki/Application_performance_management[Application
